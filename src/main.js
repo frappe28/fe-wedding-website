@@ -1,13 +1,17 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import store from "./store";
-import router from "./router";
-import "./assets/css/nucleo-icons.css";
-import "./assets/css/nucleo-svg.css";
-import MaterialDashboard from "./material-dashboard";
+import { createApp } from 'vue'
+import App from '@/App.vue'
+import { registerPlugins } from '@core/utils/plugins'
 
-const appInstance = createApp(App);
-appInstance.use(store);
-appInstance.use(router);
-appInstance.use(MaterialDashboard);
-appInstance.mount("#app");
+// Styles
+import '@core/scss/template/index.scss'
+import '@layouts/styles/index.scss'
+
+// Create vue app
+const app = createApp(App)
+
+
+// Register plugins
+registerPlugins(app)
+
+// Mount vue app
+app.mount('#app')
