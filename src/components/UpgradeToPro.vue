@@ -1,12 +1,10 @@
 <template>
-  <a
+  <div
     color="error"
     class="buy-now-button"
-    href="https://themeselection.com/item/materio-vuetify-vuejs-admin-template/"
-    target="_blank"
     rel="noopener noreferrer"
   >
-    Upgrade to Pro
+    powered by fransci&fransci
 
     <span class="button-inner" />
 
@@ -18,34 +16,10 @@
       :close-on-content-click="false"
       transition="slide-y-reverse-transition"
     >
-      <VCard>
-        <VImg src="https://cdn.jsdelivr.net/gh/themeselection/ts-assets/materio/materio-vuetify-vuejs-admin-template/banner/banner.png" />
-        <VCardTitle>Materio - Vuetify Admin Template</VCardTitle>
-        <VCardText>
-          Materio Admin is the most developer friendly & highly customisable Admin Dashboard Template based on Vuetify.
-        </VCardText>
-        <VCardText>Click on below button to explore PRO version.</VCardText>
-        <VCardText>
-          <VBtn
-            class="me-4"
-            href="https://themeselection.com/item/materio-vuetify-vuejs-admin-template/?tab=details#details"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Demo
-          </VBtn>
-          <VBtn
-            variant="outlined"
-            href="https://themeselection.com/item/materio-vuetify-vuejs-admin-template/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Download
-          </VBtn>
-        </VCardText>
+      <VCard> 
       </VCard>
     </VMenu>
-  </a>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -63,7 +37,6 @@
   background: linear-gradient(-45deg, #ffa63d, #ff3d77, #338aff, #3cf0c5);
   background-size: 600%;
   color: rgba(255, 255, 255, 90%);
-  cursor: pointer;
   font-size: 0.9375rem;
   font-weight: 500;
   letter-spacing: 0.43px;
@@ -80,13 +53,13 @@
 .buy-now-button {
   position: fixed;
   z-index: 999;
-  inset-block-end: 5%;
-  inset-inline-end: 79px;
+  inset-block-end: 2%;
+  inset-inline-end: 50px;
 
-  &:hover {
-    color: white;
-    text-decoration: none;
-  }
+  // &:hover {
+  //   color: white;
+  //   text-decoration: none;
+  // }
 
   .button-inner {
     position: absolute;
@@ -94,12 +67,12 @@
     filter: blur(12px);
     inset: 0;
     opacity: 0;
-    transition: opacity 200ms ease-in-out;
+    //transition: opacity 200ms ease-in-out;
   }
 
-  &:not(:hover) .button-inner {
-    opacity: 0.8;
-  }
+  // &:not(:hover) .button-inner {
+  //   opacity: 0.8;
+  // }
 }
 
 @keyframes anime {

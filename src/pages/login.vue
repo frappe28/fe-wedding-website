@@ -1,21 +1,21 @@
 <script setup>
-import { useTheme } from 'vuetify'
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import logo from '@images/logo.svg?raw'
 import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
 import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@images/pages/auth-v1-tree.png'
+import { useTheme } from 'vuetify'
+import { router } from '../plugins/router'
 
 const form = ref({
-  email: '',
-  password: '',
-  remember: false,
+  name: '',
+  surname: '',
 })
 
-function login(event) {
-  console.log(form)
-  console.log(form.value.email)
+function login() {
+  console.log(form.value)
+  // TODO -> chiamata BE
+  router.push({name: 'register', query: { name: form.value.name, surname:form.value.surname}})
 }
 
 const vuetifyTheme = useTheme()
@@ -24,7 +24,6 @@ const authThemeMask = computed(() => {
   return vuetifyTheme.global.name.value === 'light' ? authV1MaskLight : authV1MaskDark
 })
 
-const isPasswordVisible = ref(false)
 </script>
 
 <template>
@@ -46,24 +45,39 @@ const isPasswordVisible = ref(false)
       </VCardItem>
 
       <VCardText class="pt-2">
-        <h5 class="text-h5 font-weight-semibold mb-1">CIAO FRANSCI 👋🏻</h5>
-        <p class="mb-0">Vediamo se sei invitato!!!</p>
+        <h5 class="text-h5 font-weight-semibold mb-1">Ciao! 👋🏻</h5>
+        <p class="mb-0">Prima di entrare nel vivo del nostro matrimonio... vediamo se sei invitato!!!</p>
       </VCardText>
 
       <VCardText>
         <VForm @submit.prevent="() => {}">
           <VRow>
-            <!-- email -->
             <VCol cols="12">
+              <VTextField
+                v-model="form.name"
+                label="Nome"
+                type="text"
+              />
+            </VCol>
+            
+            <VCol cols="12">
+              <VTextField
+                v-model="form.surname"
+                label="Cognome"
+                type="text"
+              />
+            </VCol>
+
+            <!-- <VCol cols="12">
               <VTextField
                 v-model="form.email"
                 label="Email"
                 type="email"
               />
-            </VCol>
+            </VCol> -->
 
             <!-- password -->
-            <VCol cols="12">
+            <!-- <VCol cols="12">
               <VTextField
                 v-model="form.password"
                 label="Password"
@@ -71,18 +85,18 @@ const isPasswordVisible = ref(false)
                 :type="isPasswordVisible ? 'text' : 'password'"
                 :append-inner-icon="isPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'"
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
-              />
+              /> -->
 
               <!-- remember me checkbox -->
               <div class="d-flex align-center justify-space-between flex-wrap mt-1 mb-4" />
-
+            <VCol cols="12">
               <!-- login button -->
               <VBtn
                 block
                 type="submit"
                 @click="login"
               >
-                Login
+                🍾 Join the celebration! 🍾
               </VBtn>
             </VCol>
           </VRow>

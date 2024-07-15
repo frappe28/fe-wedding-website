@@ -1,11 +1,20 @@
 <script setup>
-import { useTheme } from 'vuetify'
 import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import logo from '@images/logo.svg?raw'
 import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
 import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@images/pages/auth-v1-tree.png'
+import { useRoute } from 'vue-router'
+import { useTheme } from 'vuetify'
+
+
+onMounted(() => {
+  const route = useRoute();  
+  console.log(route)
+  const {name, surname} = route.query; 
+  console.log({name, surname})
+});
 
 const form = ref({
   username: '',
