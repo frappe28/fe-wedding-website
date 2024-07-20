@@ -94,6 +94,7 @@ const authThemeMask = computed(() => {
               <VBtn
                 block
                 type="submit"
+                :disabled="form.name==='' || form.surname===''"
                 @click="login"
               >
                 🍾 Join the celebration! 🍾
