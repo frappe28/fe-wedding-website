@@ -8,14 +8,17 @@ import { useTheme } from 'vuetify'
 import { router } from '../plugins/router'
 
 const form = ref({
-  name: '',
-  surname: '',
+  nome: '',
+  cognome: '',
 })
 
 function login() {
   console.log(form.value)
-  // TODO -> chiamata BE
-  router.push({name: 'register', query: { name: form.value.name, surname:form.value.surname}})
+  if((form.value.nome !== '' && form.value.cognome !== '') && (form.value.nome !== null && form.value.cognome !== null)){
+
+    // TODO -> chiamata BE
+    router.push({name: 'register', query: { nome: form.value.nome, cognome:form.value.cognome}})
+  }
 }
 
 const vuetifyTheme = useTheme()
@@ -54,7 +57,7 @@ const authThemeMask = computed(() => {
           <VRow>
             <VCol cols="12">
               <VTextField
-                v-model="form.name"
+                v-model="form.nome"
                 label="Nome"
                 type="text"
               />
@@ -62,7 +65,7 @@ const authThemeMask = computed(() => {
             
             <VCol cols="12">
               <VTextField
-                v-model="form.surname"
+                v-model="form.cognome"
                 label="Cognome"
                 type="text"
               />
@@ -94,7 +97,7 @@ const authThemeMask = computed(() => {
               <VBtn
                 block
                 type="submit"
-                :disabled="form.name==='' || form.surname===''"
+                :disabled="form.nome==='' || form.cognome===''"
                 @click="login"
               >
                 🍾 Join the celebration! 🍾

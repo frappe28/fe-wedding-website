@@ -1,27 +1,39 @@
 <script setup>
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
-import logo from '@images/logo.svg?raw'
 import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
 import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@images/pages/auth-v1-tree.png'
+import rings from '@images/rings.svg?raw'
 import { useRoute } from 'vue-router'
 import { useTheme } from 'vuetify'
 
-
 onMounted(() => {
   const route = useRoute();  
-  console.log(route)
-  const {name, surname} = route.query; 
-  console.log({name, surname})
+  console.log(route);
+  const {nome, cognome} = route.query; 
+  console.log({nome, cognome});
+  form.value.nome = nome
+  form.value.cognome = cognome
+  form.value.nome_cognome = `${form.value.nome} ${form.value.cognome}`
 });
 
 const form = ref({
+  nome_cognome: '',
+  nome: '',
+  cognome:'',
   username: '',
+  intolleranze: false,
+  intolleranze_list: '',
   email: '',
-  password: '',
-  privacyPolicies: false,
+  telefono: '',
+  forestiero: false,
 })
+
+function submit() {
+  console.log(form.value)
+  // TODO -> chiamata BE
+  router.push({name: 'dashboard', query: { username: form.value.username }})
+}
 
 const vuetifyTheme = useTheme()
 
@@ -43,112 +55,119 @@ const isPasswordVisible = ref(false)
       <VCardItem class="justify-center">
         <template #prepend>
           <div class="d-flex">
-            <div v-html="logo" />
+            <div v-html="rings" />
           </div>
         </template>
 
-        <VCardTitle class="font-weight-semibold text-2xl text-uppercase">
-          Materio
+        <VCardTitle class="font-weight-semibold text-2xl text-uppercase text-wrap">
+          join the celebration
         </VCardTitle>
       </VCardItem>
 
       <VCardText class="pt-2">
-        <h5 class="text-h5 font-weight-semibold mb-1">
-          Adventure starts here 🚀
+        <h5 class="text-h5 font-weight-semibold mb-1 text-wrap">
+          Wedding starts here! 🐼 💒 🐻
         </h5>
         <p class="mb-0">
-          Make your app management easy and fun!
+          Ci sarai?
         </p>
       </VCardText>
 
       <VCardText>
         <VForm @submit.prevent="() => {}">
           <VRow>
+            <!-- Nome -->
+            <VCol cols="12">
+              <VTextField
+                v-model="form.nome_cognome"
+                disabled
+              />
+            </VCol>
+
             <!-- Username -->
             <VCol cols="12">
               <VTextField
                 v-model="form.username"
                 label="Username"
-                placeholder="Johndoe"
               />
             </VCol>
-            <!-- email -->
+
+            <!-- Intolleranze -->
+             <VCol cols="12">
+              <div class="d-flex align-center mt-1 mb-4">
+                <VLabel
+                  for="intolleranze"
+                  style="opacity: 1;"
+                >
+                  <span class="me-1">Sei intollerante/allergico a qualcosa? </span>
+                </VLabel>
+                <VCheckbox
+                  id="intolleranze"
+                  v-model="form.intolleranze"
+                  inline
+                />
+              </div>
+              <VTextField
+                v-if="form.intolleranze"
+                v-model="form.intolleranze_list"
+                label="Intolleranze/Allergie"
+                hint="Si intendono le intolleranze/allergie alimentari: sappiamo tutti che solo la sposa sopporta frasanz"
+              />
+            </VCol>
+
+
+            <!-- forestiero -->
+            <VCol cols="12">
+              <div class="d-flex align-center mt-1 mb-4">
+                <VLabel
+                  for="forestiero"
+                  style="opacity: 1;"
+                >
+                  <span class="me-1">Sei un forestiero?</span>
+                </VLabel>
+                <VCheckbox
+                  id="forestiero"
+                  v-model="form.forestiero"
+                  inline
+                />
+              </div>
+
+            </VCol>
+
+            <VCardText class="pt-2">
+              <h5 class="text-h5 font-weight-semibold mb-1">
+                Vuoi rimanere aggiornato sul nostro matrimonio? 💌
+              </h5>
+            </VCardText>
+             <!-- email -->
             <VCol cols="12">
               <VTextField
                 v-model="form.email"
                 label="Email"
-                placeholder="johndoe@email.com"
                 type="email"
               />
             </VCol>
 
-            <!-- password -->
+            <!-- telefono -->
             <VCol cols="12">
               <VTextField
-                v-model="form.password"
-                label="Password"
-                placeholder="············"
-                :type="isPasswordVisible ? 'text' : 'password'"
-                :append-inner-icon="isPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'"
-                @click:append-inner="isPasswordVisible = !isPasswordVisible"
+                v-model="form.telefono"
+                label="Telefono"
+                type="tel"
+                hint="si, probabilmente, anzi quasi sicuramente, abbiamo già questi dati, ma se ci conosci sai che siamo molto pigri e non ci andava di ricopiarli!"
               />
-              <div class="d-flex align-center mt-1 mb-4">
-                <VCheckbox
-                  id="privacy-policy"
-                  v-model="form.privacyPolicies"
-                  inline
-                />
-                <VLabel
-                  for="privacy-policy"
-                  style="opacity: 1;"
-                >
-                  <span class="me-1">I agree to</span>
-                  <a
-                    href="javascript:void(0)"
-                    class="text-primary"
-                  >privacy policy & terms</a>
-                </VLabel>
-              </div>
-
+            </VCol>
+            
+             <VCol cols="12">
               <VBtn
-                block
-                type="submit"
-                to="/"
-              >
-                Sign up
+                  block
+                  type="submit"
+                  @click="submit"
+                >
+                  Conferma tua presenza!
               </VBtn>
             </VCol>
 
-            <!-- login instead -->
-            <VCol
-              cols="12"
-              class="text-center text-base"
-            >
-              <span>Already have an account?</span>
-              <RouterLink
-                class="text-primary ms-2"
-                to="login"
-              >
-                Sign in instead
-              </RouterLink>
-            </VCol>
-
-            <VCol
-              cols="12"
-              class="d-flex align-center"
-            >
-              <VDivider />
-              <span class="mx-4">or</span>
-              <VDivider />
-            </VCol>
-
-            <!-- auth providers -->
-            <VCol
-              cols="12"
-              class="text-center"
-            >
-              <AuthProvider />
-            </VCol>
           </VRow>
         </VForm>
       </VCardText>
@@ -176,4 +195,8 @@ const isPasswordVisible = ref(false)
 
 <style lang="scss">
 @use "@core/scss/pages/page-auth.scss";
+.text-wrap {
+  word-wrap: break-word; /* Consente al testo di andare a capo a livello di parola */
+  //word-break: break-all; /* Consente al testo di andare a capo a livello di carattere */
+}
 </style>
