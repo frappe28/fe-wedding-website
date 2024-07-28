@@ -6,6 +6,8 @@ import authV1Tree from '@images/pages/auth-v1-tree.png'
 import rings from '@images/rings.svg?raw'
 import { useRoute } from 'vue-router'
 import { useTheme } from 'vuetify'
+import { confermaPresenza } from '../service/backend'
+
 
 onMounted(() => {
   const route = useRoute();  
@@ -29,9 +31,10 @@ const form = ref({
   forestiero: false,
 })
 
-function submit() {
-  console.log(form.value)
-  // TODO -> chiamata BE
+async function submit() {
+  console.log(form.value);
+  const response = await confermaPresenza({ user: form.value });
+  console.log(response)
   router.push({name: 'dashboard', query: { username: form.value.username }})
 }
 
@@ -41,7 +44,6 @@ const authThemeMask = computed(() => {
   return vuetifyTheme.global.name.value === 'light' ? authV1MaskLight : authV1MaskDark
 })
 
-const isPasswordVisible = ref(false)
 </script>
 
 <template>
