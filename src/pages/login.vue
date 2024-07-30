@@ -7,6 +7,7 @@ import authV1Tree from '@images/pages/auth-v1-tree.png'
 import { useTheme } from 'vuetify'
 import { router } from '../plugins/router'
 import { signIn } from '../service/backend'
+import store from '../store/index'
 
 const form = ref({
   nome: '',
@@ -19,9 +20,12 @@ async function login() {
   console.log(form.value);
   if ((form.value.nome !== '' && form.value.cognome !== '') && (form.value.nome !== null && form.value.cognome !== null)) {
     const response = await signIn({ nome: form.value.nome, cognome: form.value.cognome });
+    //TODO salvare response.data nello store di vue
     console.log(response);
+    store.dispatch('setAll', response.data);
     if (response.state) {
       console.log('Sei invitato!');
+      //TODO mandare verso la dashboard
       router.push({ name: 'register', query: { nome: form.value.nome, cognome: form.value.cognome } });
     } else {
       console.log('a chi hai fregato il link?');
@@ -76,7 +80,7 @@ const authThemeMask = computed(() => {
               <VBtn block type="submit" :disabled="form.nome === '' || form.cognome === ''" @click="login">
                 🍾 Join the celebration! 🍾
               </VBtn>
-
+              <!-- TODO Da rimpicciolire la scritta -->
               <VAlert icon="$warning" closable title="Ehi a chi hai fregato il link?"
                 text="Scherziamo, ma se pensi ci sia qualche problema, scrivici o chiamaci!" type="error"
                 class="custom-alert" v-if="loginError"></VAlert>

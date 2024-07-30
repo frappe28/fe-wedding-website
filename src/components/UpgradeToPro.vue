@@ -1,22 +1,13 @@
 <template>
-  <div
-    color="error"
-    class="buy-now-button"
-    rel="noopener noreferrer"
-  >
+  <!-- TODO da capire come gestire (ex. sotto le modali) -->
+  <div color="error" class="buy-now-button" rel="noopener noreferrer">
     powered by fransci&fransci
 
     <span class="button-inner" />
 
-    <VMenu
-      open-on-hover
-      activator="parent"
-      offset="15"
-      max-width="400px"
-      :close-on-content-click="false"
-      transition="slide-y-reverse-transition"
-    >
-      <VCard> 
+    <VMenu open-on-hover activator="parent" offset="15" max-width="400px" :close-on-content-click="false"
+      transition="slide-y-reverse-transition">
+      <VCard>
       </VCard>
     </VMenu>
   </div>

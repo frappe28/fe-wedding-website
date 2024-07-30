@@ -32,9 +32,9 @@ const form = ref({
 })
 
 async function submit() {
-  console.log(form.value);
-  const response = await confermaPresenza({ user: form.value });
-  console.log(response)
+  console.log(JSON.stringify(form.value));
+  const response = await confermaPresenza(form.value);
+  console.log(response);
   router.push({name: 'dashboard', query: { username: form.value.username }})
 }
 
