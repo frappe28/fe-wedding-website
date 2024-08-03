@@ -19,12 +19,17 @@ let loginError = ref(false);
 async function login() {
   console.log(form.value);
   if ((form.value.nome !== '' && form.value.cognome !== '') && (form.value.nome !== null && form.value.cognome !== null)) {
+    //TODO gestire utente farlocco per evitare chiamate a BE. ES. admin/admin non chiama signin, mock response...
     const response = await signIn({ nome: form.value.nome, cognome: form.value.cognome });
-    //TODO salvare response.data nello store di vue
+    //console.log("login -> await signIn. Response:");
     console.log(response);
-    store.dispatch('setAll', response.data);
+    //console.log("response.data: ", response.data);
     if (response.state) {
       console.log('Sei invitato!');
+      store.dispatch('setAll', response.data);
+
+      //console.log('Recupero da store!');
+      //console.log(store.getters.getAll); 
       //TODO mandare verso la dashboard
       router.push({ name: 'register', query: { nome: form.value.nome, cognome: form.value.cognome } });
     } else {
