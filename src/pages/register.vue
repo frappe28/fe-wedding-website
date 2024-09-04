@@ -1,8 +1,8 @@
 <script setup>
 import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
-import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
-import authV1Tree from '@images/pages/auth-v1-tree.png'
+import wrings from '@images/pages/wedding-ring.png'
+import sposini from '@images/pages/sposini.png'
 import rings from '@images/rings.svg?raw'
 import { useRoute } from 'vue-router'
 import { useTheme } from 'vuetify'
@@ -177,14 +177,14 @@ const authThemeMask = computed(() => {
 
     <VImg
       class="auth-footer-start-tree d-none d-md-block"
-      :src="authV1Tree"
-      :width="250"
+      :src="sposini"
+      :width="200"
     />
 
     <VImg
-      :src="authV1Tree2"
+      :src="wrings"
       class="auth-footer-end-tree d-none d-md-block"
-      :width="350"
+      :width="150"
     />
 
     <!-- bg img -->

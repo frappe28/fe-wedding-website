@@ -1,9 +1,9 @@
 <script setup>
-import logo from '@images/logo.svg?raw'
+import logo from '@images/pages/logo3.png'
 import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
-import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
-import authV1Tree from '@images/pages/auth-v1-tree.png'
+import rings from '@images/pages/wedding-ring.png'
+import sposini from '@images/pages/sposini.png'
 import { useTheme } from 'vuetify'
 import { router } from '../plugins/router'
 import { signIn } from '../service/backend'
@@ -55,7 +55,7 @@ const authThemeMask = computed(() => {
       <VCardItem class="justify-center">
         <template #prepend>
           <div class="d-flex">
-            <div v-html="logo" />
+            <VImg :src="logo" :width="90" />
           </div>
         </template>
 
@@ -95,9 +95,10 @@ const authThemeMask = computed(() => {
       </VCardText>
     </VCard>
 
-    <VImg class="auth-footer-start-tree d-none d-md-block" :src="authV1Tree" :width="250" />
+    <VImg :src="rings" class="auth-footer-end-tree d-none d-md-block" :width="150" />
+    <VImg class="auth-footer-start-tree d-none d-md-block" :src="sposini" :width="200" />
 
-    <VImg :src="authV1Tree2" class="auth-footer-end-tree d-none d-md-block" :width="350" />
+
 
     <!-- bg img -->
     <VImg class="auth-footer-mask d-none d-md-block" :src="authThemeMask" />

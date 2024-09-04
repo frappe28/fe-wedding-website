@@ -5,10 +5,10 @@ export const routes = [
   //   //component: () => import('@/layouts/default.vue'),
   //   component: () => import('@/pages/login.vue'),
   //   children: [
-  //     {
-  //       path: 'dashboard',
-  //       component: () => import('@/pages/dashboard.vue'),
-  //     },
+  {
+    path: '/dashboard',
+    component: () => import('@/pages/dashboard.vue'),
+  },
   //     {
   //       path: 'account-settings',
   //       component: () => import('@/pages/account-settings.vue'),
