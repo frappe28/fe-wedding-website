@@ -3,9 +3,13 @@ import AnalyticsDepositWithdraw from '@/views/dashboard/AnalyticsDepositWithdraw
 import AnalyticsSalesByCountries from '@/views/dashboard/AnalyticsSalesByCountries.vue'
 import AnalyticsUserTable from '@/views/dashboard/AnalyticsUserTable.vue'
 import Countdown from '@/views/dashboard/Countdown.vue'
+import Calendar from '@/views/dashboard/Calendar.vue'
+import Carosello from '@/views/dashboard/Carosello.vue'
+import Contatti from '@/views/dashboard/Contatti.vue'
 import MappaChiesa from '@/views/dashboard/MappaChiesa.vue'
 import MappaLocation from '@/views/dashboard/MappaLocation.vue'
 import Welcome from '@/views/dashboard/Welcome.vue'
+import Iban from '@/views/dashboard/Iban.vue'
 import logo from '@images/pages/logo3.png'
 
 
@@ -17,18 +21,32 @@ import logo from '@images/pages/logo3.png'
       <!-- logo -->
       <VImg :src="logo" class="logo" />
     </VCol>
+
     <VCol cols="12" md="4">
-      <VRow class="match-height">
-        <Welcome />
-      </VRow>
-      <VRow class="match-height">
-        <!-- <Carosello /> -->
-        EHI
+      <VRow>
+        <VCol cols="12">
+          <Welcome />
+        </VCol>
+        <VCol cols="12">
+          <Calendar />
+        </VCol>
       </VRow>
     </VCol>
 
     <VCol cols="12" md="4">
-      <Countdown />
+      <VRow>
+        <VCol cols="12">
+          <Countdown />
+        </VCol>
+        <VCol cols="12">
+          <Iban />
+        </VCol>
+
+      </VRow>
+    </VCol>
+
+    <VCol cols="12" md="12">
+      <Carosello />
     </VCol>
 
     <VCol cols="12" md="6">
@@ -39,16 +57,9 @@ import logo from '@images/pages/logo3.png'
       <MappaLocation />
     </VCol>
 
-    <VCol cols="12" md="4">
-      <AnalyticsSalesByCountries />
-    </VCol>
-
-    <VCol cols="12" md="8">
-      <AnalyticsDepositWithdraw />
-    </VCol>
-
     <VCol cols="12">
-      <AnalyticsUserTable />
+      <Contatti />
     </VCol>
+
   </VRow>
 </template>

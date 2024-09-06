@@ -1,0 +1,48 @@
+<script setup>
+import { ref } from 'vue';
+
+const iban = 'IT60X0542811101000000123456'; // Sostituisci con il tuo IBAN
+const showPopup = ref(false);
+
+const copyIbanToClipboard = () => {
+  navigator.clipboard.writeText(iban)
+    .then(() => {
+      console.log('IBAN copiato negli appunti!');
+      showPopup.value = true;
+
+      // Nascondi il pop-up dopo 3 secondi
+      setTimeout(() => {
+        showPopup.value = false;
+      }, 3000);
+    })
+    .catch(err => {
+      console.error('Errore durante la copia:', err);
+    });
+};
+</script>
+
+<template>
+  <VCard class="position-relative">
+    <VCardText>
+      <div class="mb-2">
+        <h5 class="text-h5">
+          Per noi è molto importante che tu ci sia! <span class="text-high-emphasis">💚</span>
+        </h5>
+        <div class="text-body-1">
+          Il pensiero più bello che tu possa farci è essere con noi nel nostro grande giorno. Ma se gradisci farci un
+          regalo, preferiremmo metterlo nel salvadanaio, e quando lo useremo in futuro, penseremo con gioia a te e al
+          tuo gesto.
+        </div>
+      </div>
+
+      <VBtn size="small" @click="copyIbanToClipboard">
+        Copia il nostro iban 🎁
+      </VBtn>
+
+      <!-- Mostra il pop-up solo quando showPopup è true -->
+      <VSnackbar v-if="showPopup" v-model="showPopup" timeout="3000">
+        IBAN copiato negli appunti! ✅
+      </VSnackbar>
+    </VCardText>
+  </VCard>
+</template>

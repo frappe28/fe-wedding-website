@@ -1,4 +1,3 @@
-<!-- eslint-disable no-restricted-imports -->
 <script setup>
 
 const items = [
@@ -20,7 +19,7 @@ const items = [
 
 <template>
   <VCard>
-    <VCarousel>
+    <VCarousel hide-delimiters cycle show-arrows="hover">
       <VCarouselItem v-for="(item, i) in items" :key="i" :src="item.src" cover> </VCarouselItem>
     </VCarousel>
   </VCard>
