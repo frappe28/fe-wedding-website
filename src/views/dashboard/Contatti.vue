@@ -2,6 +2,9 @@
 import { ref } from 'vue';
 import whastapp from '@images/misc/whastapp-logo.png';
 import cell from '@images/misc/phone-call.png';
+import gmail from '@images/misc/gmail.png';
+import instagram from '@images/misc/instagram.png';
+
 const cellSposa = '3923923453';
 const cellSposo = '3426734350';
 const showPopup = ref(false);
@@ -51,21 +54,41 @@ const copyCellSposoToClipboard = () => {
           sola i nostri numeri di telefono ti lasciamo qui i nostri recapiti
         </div>
       </div>
+      <!-- TODO mettere telegram -->
+      <!-- TODO mettere sotto le scritte di sposo e sposa -->
       <VRow>
         <VCol class="d-flex align-items-center">
+          <a href="tel:+393426734350" target="_blank" class="d-flex align-items-center">
+            <VImg :src="cell" :width="40" class="me-2"></VImg>
+          </a>
           <a href="https://wa.me/393426734350" target="_blank" class="d-flex align-items-center">
-            <VImg :src="whastapp" :width="50" class="me-2"></VImg>
-            Sposo 🤵🏻
+            <VImg :src="whastapp" :width="40" class="me-2"></VImg>
           </a>
+          <a href="mailto:sanzone95@gmail.com,francescadeperte@gmail.com" target="_blank"
+            class="d-flex align-items-center">
+            <VImg :src="gmail" :width="40" class="me-2"></VImg>
+          </a>
+          <a href="https://www.instagram.com/frasanz?igsh=MWl1dTY3dnBnZDE0eA==" target="_blank"
+            class="d-flex align-items-center">
+            <VImg :src="instagram" :width="40" class="me-2"></VImg>
+          </a>
+          Sposo 🤵🏻
         </VCol>
         <VCol class="d-flex align-items-center">
+          <a href="tel:+393923923453" target="_blank" class="d-flex align-items-center">
+            <VImg :src="cell" :width="40" class="me-2"></VImg>
+          </a>
           <a href="https://wa.me/393923923453" target="_blank" class="d-flex align-items-center">
-            <VImg :src="whastapp" :width="50" class="me-2"></VImg>
-            Sposa 👰🏻‍♀️
+            <VImg :src="whastapp" :width="40" class="me-2"></VImg>
           </a>
-        </VCol>
-        <VCol class="d-flex align-items-center">
-          <VImg :src="cell" :width="2" class="me-2"></VImg>
+          <a href="mailto:sanzone95@gmail.com,francescadeperte@gmail.com" target="_blank"
+            class="d-flex align-items-center">
+            <VImg :src="gmail" :width="40" class="me-2"></VImg>
+          </a>
+          <a href="https://www.instagram.com/fradeps?igsh=dHhvazZ0MXcyMXJp" target="_blank"
+            class="d-flex align-items-center">
+            <VImg :src="instagram" :width="40" class="me-2"></VImg>
+          </a>
           Sposa 👰🏻‍♀️
         </VCol>
       </VRow>
