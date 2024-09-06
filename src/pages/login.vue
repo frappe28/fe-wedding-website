@@ -1,9 +1,9 @@
 <script setup>
-import logo from '@images/pages/logo3.png'
 import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
-import rings from '@images/pages/wedding-ring.png'
+import logo from '@images/pages/logo3.png'
 import sposini from '@images/pages/sposini.png'
+import rings from '@images/pages/wedding-ring.png'
 import { useTheme } from 'vuetify'
 import { router } from '../plugins/router'
 import { signIn } from '../service/backend'
@@ -18,23 +18,31 @@ let loginError = ref(false);
 
 async function login() {
   console.log(form.value);
-  if ((form.value.nome !== '' && form.value.cognome !== '') && (form.value.nome !== null && form.value.cognome !== null)) {
-    //TODO gestire utente farlocco per evitare chiamate a BE. ES. admin/admin non chiama signin, mock response...
-    const response = await signIn({ nome: form.value.nome, cognome: form.value.cognome });
+  if ((form.value.nome !== null && form.value.cognome !== null)
+    && (form.value.nome.trim() !== '' && form.value.cognome.trim() !== '')) {
+    try {
+      // Mostra il loader globale
+      document.getElementById('global-loader-http').style.display = 'block';
+      const response = await signIn({ nome: form.value.nome, cognome: form.value.cognome });
 
-    //TODO aggiungere loader
-    //console.log("login -> await signIn. Response:");
-    console.log(response);
-    if (response.state) {
-      console.log('Sei invitato!');
-      store.dispatch('setAll', response.data);
+      console.log("SignIn response: ", response);
+      if (response.state) {
+        loginError.value = false;
+        console.log('Sei invitato!');
+        store.dispatch('setAll', response.data);
 
-      //console.log('Recupero da store!');
-      //console.log(store.getters.getAll); 
-      router.push({ name: 'dashboard', query: { nome: form.value.nome } })
-    } else {
-      console.log('a chi hai fregato il link?');
-      loginError.value = true;
+        //console.log('Recupero da store!');
+        //console.log(store.getters.getAll); 
+        router.push({ name: 'dashboard', query: { nome: form.value.nome } })
+      } else {
+        console.log('a chi hai fregato il link?');
+        loginError.value = true;
+      }
+    } catch (e) {
+      console.log("ERR: ", e);
+    } finally {
+      // Nascondi il loader globale
+      document.getElementById('global-loader-http').style.display = 'none';
     }
   }
 }
@@ -85,7 +93,6 @@ const authThemeMask = computed(() => {
               <VBtn block type="submit" :disabled="form.nome === '' || form.cognome === ''" @click="login">
                 🍾 Join the celebration! 🍾
               </VBtn>
-              <!-- TODO Da rimpicciolire la scritta -->
               <VAlert icon="$warning" closable title="Ehi a chi hai fregato il link?"
                 text="Scherziamo, ma se pensi ci sia qualche problema, scrivici o chiamaci!" type="error"
                 class="custom-alert" v-if="loginError"></VAlert>

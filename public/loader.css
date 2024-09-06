@@ -56,6 +56,55 @@ html {
   transition: all 0.3s ease;
 }
 
+#loading-bg-http {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--initial-loader-bg, #fff);
+  block-size: 100%;
+  gap: 1rem 0;
+  inline-size: 100%;
+}
+
+.loading-http {
+  position: relative;
+  box-sizing: border-box;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  block-size: 55px;
+  inline-size: 55px;
+  z-index: 9999 !important;
+}
+
+.loading-http .effect-1,
+.loading-http .effect-2,
+.loading-http .effect-3 {
+  position: absolute;
+  box-sizing: border-box;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  block-size: 100%;
+  border-inline-start: 3px solid var(--initial-loader-color, #eee);
+  inline-size: 100%;
+}
+
+.loading-http .effect-1 {
+  animation: rotate 1s ease infinite;
+}
+
+.loading-http .effect-2 {
+  animation: rotate-opacity 1s ease infinite 0.1s;
+}
+
+.loading-http .effect-3 {
+  animation: rotate-opacity 1s ease infinite 0.2s;
+}
+
+.loading-http .effects {
+  transition: all 0.3s ease;
+}
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
