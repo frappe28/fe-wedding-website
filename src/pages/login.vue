@@ -21,17 +21,17 @@ async function login() {
   if ((form.value.nome !== '' && form.value.cognome !== '') && (form.value.nome !== null && form.value.cognome !== null)) {
     //TODO gestire utente farlocco per evitare chiamate a BE. ES. admin/admin non chiama signin, mock response...
     const response = await signIn({ nome: form.value.nome, cognome: form.value.cognome });
+
+    //TODO aggiungere loader
     //console.log("login -> await signIn. Response:");
     console.log(response);
-    //console.log("response.data: ", response.data);
     if (response.state) {
       console.log('Sei invitato!');
       store.dispatch('setAll', response.data);
 
       //console.log('Recupero da store!');
       //console.log(store.getters.getAll); 
-      //TODO mandare verso la dashboard
-      router.push({ name: 'register', query: { nome: form.value.nome, cognome: form.value.cognome } });
+      router.push({ name: 'dashboard', query: { nome: form.value.nome } })
     } else {
       console.log('a chi hai fregato il link?');
       loginError.value = true;
