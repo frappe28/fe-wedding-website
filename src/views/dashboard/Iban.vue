@@ -35,7 +35,7 @@ const copyIbanToClipboard = () => {
         </div>
       </div>
 
-      <VBtn size="small" @click="copyIbanToClipboard">
+      <VBtn class="d-flex flex-column align-items-center" size="small" @click="copyIbanToClipboard">
         Copia il nostro iban 🎁
       </VBtn>
 
