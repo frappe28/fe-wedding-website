@@ -4,13 +4,15 @@
   white-space: normal;
 }
 
-/*@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .col-xs-incassi {
-    width: 33.33333%;
-  }
-}*/
+/*La tipologia (media-type) indica la categoria di un dispositivo 
+se non viene espressamente indicata verra' usata la corrispondenza piu' generica possibile.
+all - Identifica tutti i dispositivi.
+print - E' destinata alla modalita' di stampa, quindi modifichera' un documento o una pagina nella sua versione stampabile.
+screen - Per gli schermi, i tablet o gli smartphone.
+speech - Dedicata ai sintetizzatori vocali o per gli screen reader che leggono la pagina ad alta voce.
+*/
 
-@media (max-width: 345px) {
+@media /*screen and */ (max-width: 345px) {
   .auth-wrapper.d-flex.align-center.justify-center.pa-4
    >.auth-card.pa-4.pt-7.v-card.v-card--density-default.v-card--variant-elevated.v-theme--light
     >.v-card-item.justify-center
@@ -25,7 +27,7 @@
   }
 }
 
-@media (min-width: 765px) and (min-height: 504px) {
+@media /*screen and */ (min-width: 765px) and (min-height: 504px) {
   .auth-footer-start-tree.d-none.d-md-block,  
   .auth-footer-end-tree.d-none.d-md-block {
         display: block !important;

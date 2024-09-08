@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO da capire come gestire (ex. sotto le modali) -->
   <div color="error" class="buy-now-button" rel="noopener noreferrer">
     powered by fransci&fransci
 
@@ -16,7 +15,7 @@
 <style lang="scss" scoped>
 .buy-now-button,
 .button-inner {
-  display: inline-flex;
+  display: block;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
@@ -42,11 +41,11 @@
 }
 
 .buy-now-button {
-  position: fixed;
+  position: relative;
   z-index: 999;
-  inset-block-end: 2%;
-  inset-inline-end: 50px;
-
+  inset-block-end: 0%;
+  inset-inline-end: 0px;
+  margin-block-start: auto;
   // &:hover {
   //   color: white;
   //   text-decoration: none;

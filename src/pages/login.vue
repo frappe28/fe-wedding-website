@@ -9,6 +9,7 @@ import { router } from '../plugins/router'
 import { signIn } from '../service/backend'
 import store from '../store/index'
 
+//le magie di checco
 import '../assets/styles/frasanz.scss'
 
 
@@ -24,6 +25,8 @@ async function login() {
   if ((form.value.nome !== null && form.value.cognome !== null)
     && (form.value.nome !== '' && form.value.cognome !== '')) {
     try {
+      //reset modale di errore
+      loginError.value = false;
       // Mostra il loader globale
       document.getElementById('global-loader-http').style.display = 'block';
       const response = await signIn({ nome: form.value.nome, cognome: form.value.cognome });
