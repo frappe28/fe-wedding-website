@@ -1,5 +1,5 @@
 <script setup>
-
+//TODO le foto si vedono male su smartphone, bisogna fare qualche modifica al carosello
 const items = [
   {
     src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',

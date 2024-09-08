@@ -4,6 +4,7 @@ onMounted(() => {
   console.log(route);
   const { nome, cognome } = route.query;
   console.log({ nome, cognome });
+  //TODO leggere nome e cognome da store e non da query params. se store VUOTO: riportare a pagina di login
   form.value.nome = nome ?? 'amico'
   form.value.cognome = cognome
   form.value.nome_cognome = `${form.value.nome} ${form.value.cognome}`

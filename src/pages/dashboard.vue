@@ -12,7 +12,7 @@ import Welcome from '@/views/dashboard/Welcome.vue'
 import Iban from '@/views/dashboard/Iban.vue'
 import logo from '@images/pages/logo3.png'
 
-
+//TODO verificare perché il marker sulla mappa da cellulare non si vede.
 </script>
 
 <template>
