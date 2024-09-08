@@ -9,6 +9,9 @@ import { router } from '../plugins/router'
 import { signIn } from '../service/backend'
 import store from '../store/index'
 
+import '../assets/styles/frasanz.scss'
+
+
 const form = ref({
   nome: '',
   cognome: '',
@@ -19,7 +22,7 @@ let loginError = ref(false);
 async function login() {
   console.log(form.value);
   if ((form.value.nome !== null && form.value.cognome !== null)
-    && (form.value.nome.trim() !== '' && form.value.cognome.trim() !== '')) {
+    && (form.value.nome !== '' && form.value.cognome !== '')) {
     try {
       // Mostra il loader globale
       document.getElementById('global-loader-http').style.display = 'block';
@@ -62,12 +65,11 @@ const authThemeMask = computed(() => {
     <VCard class="auth-card pa-4 pt-7" max-width="448">
       <VCardItem class="justify-center">
         <template #prepend>
-          <div class="d-flex">
+          <div class="d-flex adatta-titolo-schermo-piccolo">
             <VImg :src="logo" :width="90" />
           </div>
         </template>
-
-        <VCardTitle class="font-weight-semibold text-2xl text-uppercase"> Francis' Wedding </VCardTitle>
+        <VCardTitle class="font-weight-semibold text-2xl text-uppercase wrap-title"> Francis' Wedding </VCardTitle>
       </VCardItem>
 
       <VCardText class="pt-2">
@@ -102,7 +104,7 @@ const authThemeMask = computed(() => {
       </VCardText>
     </VCard>
 
-    <VImg :src="rings" class="auth-footer-end-tree d-none d-md-block" :width="150" />
+    <VImg class="auth-footer-end-tree d-none d-md-block" :src="rings" :width="150" />
     <VImg class="auth-footer-start-tree d-none d-md-block" :src="sposini" :width="200" />
 
 

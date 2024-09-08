@@ -6,17 +6,19 @@ const API = axios.create({
 });
 
 export const signIn = async(user) =>{
-    if (user.nome === "admin" && user.cognome === "admin") {
+    let nome = user.nome.toLowerCase().trim();
+    let cognome = user.cognome.toLowerCase().trim();
+    if (nome === "admin" && cognome === "admin") {
         return {"state":true,"message":"Invitato!","data":{"cognome":"admin","id":"adminadmin","nome":"admin"}};
-    } else if (user.nome === "admin" && user.cognome === "password") {
+    } else if (nome === "admin" && cognome === "password") {
         return {"state":false,"message":"Non Invitato"};
     } else {
         try {
             const response = await API.get('/controllo-invitato', 
                 {
                     params:{
-                        nome: user.nome.trim(),
-                        cognome: user.cognome.trim()
+                        nome: nome,
+                        cognome: cognome
                     }
                 }
             )
