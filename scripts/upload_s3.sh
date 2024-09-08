@@ -19,7 +19,7 @@ fi
 
 # Carica i file nel bucket S3
 echo "Caricamento dei file nel bucket S3..."
-aws s3 sync $BUILD_DIR s3://$BUCKET_NAME --delete
+aws s3 sync $BUILD_DIR s3://$BUCKET_NAME
 
 # Verifica se il caricamento è andato a buon fine
 if [ $? -ne 0 ]; then

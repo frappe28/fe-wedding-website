@@ -1,18 +1,45 @@
 <script setup>
-import AnalyticsDepositWithdraw from '@/views/dashboard/AnalyticsDepositWithdraw.vue'
-import AnalyticsSalesByCountries from '@/views/dashboard/AnalyticsSalesByCountries.vue'
-import AnalyticsUserTable from '@/views/dashboard/AnalyticsUserTable.vue'
-import Countdown from '@/views/dashboard/Countdown.vue'
 import Calendar from '@/views/dashboard/Calendar.vue'
 import Carosello from '@/views/dashboard/Carosello.vue'
 import Contatti from '@/views/dashboard/Contatti.vue'
+import Countdown from '@/views/dashboard/Countdown.vue'
+import Iban from '@/views/dashboard/Iban.vue'
+import LibrettoMessa from '@/views/dashboard/LibrettoMessa.vue'
 import MappaChiesa from '@/views/dashboard/MappaChiesa.vue'
 import MappaLocation from '@/views/dashboard/MappaLocation.vue'
 import Welcome from '@/views/dashboard/Welcome.vue'
-import Iban from '@/views/dashboard/Iban.vue'
 import logo from '@images/pages/logo3.png'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 //TODO verificare perché il marker sulla mappa da cellulare non si vede.
+
+const targetDate = new Date('2025-05-14T00:00:00');
+const isCountdownFinished = ref(false);
+const timeRemainingDays = ref('');
+const timeRemainingMinutes = ref('');
+
+const calculateTimeRemaining = () => {
+  const now = new Date();
+  const difference = targetDate - now;
+
+  if (difference <= 0) {
+    isCountdownFinished.value = true;
+    timeRemainingDays.value = '';
+    timeRemainingMinutes.value = '';
+    return;
+  }
+};
+
+let countdownInterval;
+
+onMounted(() => {
+  calculateTimeRemaining();
+  countdownInterval = setInterval(calculateTimeRemaining, 1000);
+});
+
+onUnmounted(() => {
+  clearInterval(countdownInterval);
+});
 </script>
 
 <template>
@@ -28,7 +55,7 @@ import logo from '@images/pages/logo3.png'
           <Welcome />
         </VCol>
         <VCol cols="12">
-          <Calendar />
+          <Countdown />
         </VCol>
       </VRow>
     </VCol>
@@ -36,12 +63,11 @@ import logo from '@images/pages/logo3.png'
     <VCol cols="12" md="4">
       <VRow>
         <VCol cols="12">
-          <Countdown />
+          <Calendar />
         </VCol>
-        <VCol cols="12">
-          <Iban />
+        <VCol cols="12" v-if="isCountdownFinished">
+          <LibrettoMessa />
         </VCol>
-
       </VRow>
     </VCol>
 
@@ -55,6 +81,10 @@ import logo from '@images/pages/logo3.png'
 
     <VCol cols="12" md="6">
       <MappaLocation />
+    </VCol>
+
+    <VCol cols="12">
+      <Iban />
     </VCol>
 
     <VCol cols="12">
