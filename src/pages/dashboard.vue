@@ -11,7 +11,15 @@ import Welcome from '@/views/dashboard/Welcome.vue'
 import logo from '@images/pages/logo3.png'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-//TODO verificare perché il marker sulla mappa da cellulare non si vede.
+//le magie di checco
+import '../assets/styles/frasanz-dash.scss'
+
+/*
+TODO:
+-i testi, per quanto possibile (es in dashboard), devono essere tutti con stesso allineamento (es. giustify)
+-"ma soprattutto assicuratevi che frasanz sia in orario", dal mio telefono tronca l'ultima lettera (è presente, se seleziono tutta la frase mi porta alla fine troncando la prima)
+-verificare perché il marker sulla mappa da cellulare non si vede.
+*/
 
 const targetDate = new Date('2025-05-14T00:00:00');
 const isCountdownFinished = ref(false);

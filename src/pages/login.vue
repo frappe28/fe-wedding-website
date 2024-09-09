@@ -10,7 +10,7 @@ import { signIn } from '../service/backend'
 import store from '../store/index'
 
 //le magie di checco
-import '../assets/styles/frasanz.scss'
+import '../assets/styles/frasanz-login.scss'
 
 
 const form = ref({
@@ -58,15 +58,6 @@ const vuetifyTheme = useTheme()
 const authThemeMask = computed(() => {
   return vuetifyTheme.global.name.value === 'light' ? authV1MaskLight : authV1MaskDark
 })
-
-/*
-TODO:
--le pagine non devono, verificare tutte le pagine,avere lo scroll orizzontale (dal mio telefono fa qualche pixel di scroll)
--i testi, per quanto possibile (es in dashboard), devono essere tutti con stesso allineamento (es. giustify)
--"ma soprattutto assicuratevi che frasanz sia in orario", dal mio telefono tronca l'ultima lettera (è presente, se seleziono tutta la frase mi porta alla fine troncando la prima)
-
-*/
-
 
 </script>
 
