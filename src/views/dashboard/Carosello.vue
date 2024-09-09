@@ -1,8 +1,10 @@
 <script setup>
+import { BASE_URL } from '@/costants';
+
 //TODO le foto si vedono male su smartphone, bisogna fare qualche modifica al carosello
 const items = [
   {
-    src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+    src: `${BASE_URL}/photos/photo_1.jpg`,
   },
   {
     src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
