@@ -15,6 +15,7 @@ export const routes = [
   },
   {
     path: '/welcome',
+    name: 'welcome',
     component: () => import('@/pages/login.vue'),
     // children: [
     //   {

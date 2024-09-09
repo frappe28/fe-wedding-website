@@ -11,7 +11,7 @@ import store from '../store/index'
 
 //le magie di checco
 import '../assets/styles/frasanz-login.scss'
-
+//todo fare in modo che la build per production renda i file illeggibili/indebuggabili
 
 const form = ref({
   nome: '',
@@ -39,7 +39,7 @@ async function login() {
 
         //console.log('Recupero da store!');
         //console.log(store.getters.getAll); 
-        router.push({ name: 'dashboard', query: { nome: form.value.nome } })
+        router.push({ name: 'dashboard', query: { /*nome: form.value.nome*/ } })
       } else {
         console.log('a chi hai fregato il link?');
         loginError.value = true;

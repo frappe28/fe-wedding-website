@@ -1,10 +1,17 @@
 <script setup>
+import { router } from '../../plugins/router';
+import store from '../../store/index';
+
 onMounted(() => {
   const route = useRoute();
   console.log(route);
-  const { nome, cognome } = route.query;
+  //const { nome, cognome } = route.query;
+  const nome = store.getters.getNome;
+  const cognome = store.getters.getCognome;
   console.log({ nome, cognome });
-  //TODO leggere nome e cognome da store e non da query params. se store VUOTO: riportare a pagina di login
+  if (nome == null || nome == "" || cognome == null || cognome == "") {
+    router.push({ name: 'welcome', query: {} });
+  }
   form.value.nome = nome ?? 'amico'
   form.value.cognome = cognome
   form.value.nome_cognome = `${form.value.nome} ${form.value.cognome}`
