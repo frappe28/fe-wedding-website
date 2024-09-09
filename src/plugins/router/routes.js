@@ -1,5 +1,6 @@
 export const routes = [
   //TODO path '/' deve portare a dashboard e non a LOGIN. poi dashboard in assenza di dati nello store deve riportare alla login o permettere di navigare
+  //TODO refresh della pagina non deve dare ACCESS DENIED ma conservare la sessione.
   
   { path: '/', redirect: '/welcome' },
   {
