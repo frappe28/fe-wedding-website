@@ -23,11 +23,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <VCard title="🕺🏻💃🏻 Dopo la cerimonia, ci vediamo qui:" class="position-relative">
+  <VCard title="🕺🏻💃🏻 Dopo la cerimonia, ci vediamo qui:" class="position-relative v-text-wrap">
     <template #subtitle>
       <p class="text-body-1 mb-0 mt-">
-        <span class="d-inline-block font-weight-medium text-high-emphasis">E ricordatevi le scarpe comode...</span>
-        <br>dopo l'abbuffata si continua a ballare!
+        <span class="d-inline-block font-weight-medium text-high-emphasis" style="text-wrap: wrap;">
+          E ricordatevi le scarpe comode...
+        </span>
+        <br>
+        <span style="text-wrap: wrap;">dopo l'abbuffata si continua a ballare!</span>
       </p>
     </template>
 
