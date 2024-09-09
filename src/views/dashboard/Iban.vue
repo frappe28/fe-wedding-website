@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const iban = 'IT60X0542811101000000123456'; // Sostituisci con il tuo IBAN
+const iban = 'IT32D0100504001000000003260 Intestato a: Francesca Deperte';
 const showPopup = ref(false);
 
 const copyIbanToClipboard = () => {
