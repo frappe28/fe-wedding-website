@@ -2,6 +2,8 @@
   overflow-x: hidden;
 }
 
-.v-text-wrap {
+.v-text-wrap-justify>.v-card-item>.v-card-item__content>.v-card-title,
+.v-text-wrap-justify {
   text-wrap: wrap;
+  text-align: justify;
 }

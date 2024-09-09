@@ -14,12 +14,6 @@ import { onMounted, onUnmounted, ref } from 'vue'
 //le magie di checco
 import '../assets/styles/frasanz-dash.scss'
 
-/*
-TODO:
--i testi, per quanto possibile (es in dashboard), devono essere tutti con stesso allineamento (es. giustify)
--"ma soprattutto assicuratevi che frasanz sia in orario", dal mio telefono tronca l'ultima lettera (è presente, se seleziono tutta la frase mi porta alla fine troncando la prima)
-*/
-
 const targetDate = new Date('2025-05-14T00:00:00');
 const isCountdownFinished = ref(false);
 const timeRemainingDays = ref('');

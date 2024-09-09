@@ -21,14 +21,13 @@ const form = ref({
   <VCard class="position-relative">
     <VCardText>
       <div class="mb-2">
-        <h5 class="text-h5">
+        <h5 class="text-h5 v-text-wrap-justify">
           Ciao {{ form.nome }} <span class="text-high-emphasis">🎉</span>
         </h5>
         <div class="text-body-1">
-          E quindi ci sarai al nostro matrimonio?
+          <span class="v-text-wrap-justify">E quindi ci sarai al nostro matrimonio? </span>
         </div>
       </div>
-
       <VBtn size="small">
         Conferma la tua presenza 💌
       </VBtn>

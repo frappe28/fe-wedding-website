@@ -1,8 +1,8 @@
 <script setup>
 import gmail from '@images/misc/gmail.png';
 import instagram from '@images/misc/instagram.png';
-import telegram from '@images/misc/telegram.png';
 import cell from '@images/misc/phone-call.png';
+import telegram from '@images/misc/telegram.png';
 import whastapp from '@images/misc/whastapp-logo.png';
 
 </script>
@@ -11,12 +11,16 @@ import whastapp from '@images/misc/whastapp-logo.png';
   <VCard class="position-relative">
     <VCardText>
       <div class="mb-2 text-center">
-        <h5 class="text-h5">
+        <h5 class="text-h5 v-text-wrap-justify">
           Hai bisogno degli sposi? <span class="text-high-emphasis">🤗</span>
         </h5>
         <div class="text-body-1">
-          Dovresti già avere i nostri contatti, ma nel caso in cui la tua rubrica abbia misteriosamente cancellato da
-          sola i nostri numeri di telefono ti lasciamo qui i nostri recapiti
+          <p class="v-text-wrap-justify">
+            Dovresti già avere i nostri contatti,
+            ma nel caso in cui la tua rubrica
+            abbia misteriosamente cancellato da
+            sola i nostri numeri di telefono ti lasciamo qui i nostri recapiti
+          </p>
         </div>
       </div>
 

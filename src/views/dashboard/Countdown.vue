@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 const targetDate = new Date('2025-05-14T00:00:00');
 const isCountdownFinished = ref(false);
@@ -41,8 +41,9 @@ onUnmounted(() => {
   <VCard title="Save the Date!" class="position-relative">
     <template #subtitle>
       <p v-if="!isCountdownFinished" class="text-body-1 mb-0">
-        <span class="d-inline-block font-weight-medium text-high-emphasis">Manca sempre meno! 🎯</span>
-        <br> ok, la sposa non è in ansia (forse) 🤯
+        <span class="d-inline-block font-weight-medium text-high-emphasis v-text-wrap-justify">Manca sempre meno!
+          🎯</span>
+        <br><span class="v-text-wrap-justify"> ok, la sposa non è in ansia (forse) 🤯 </span>
       </p>
     </template>
     <VCardText class="pt-5 pb-10 text-center">
