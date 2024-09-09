@@ -1,7 +1,7 @@
 export const routes = [
   //TODO path '/' deve portare a dashboard e non a LOGIN. poi dashboard in assenza di dati nello store deve riportare alla login o permettere di navigare
   
-  { path: '/', redirect: '/login' },
+  { path: '/', redirect: '/welcome' },
   {
     path: '/dashboard',
     name: 'dashboard',
@@ -13,7 +13,7 @@ export const routes = [
     component: () => import('@/pages/register.vue')
   },
   {
-    path: '/login',
+    path: '/welcome',
     component: () => import('@/pages/login.vue'),
     // children: [
     //   {
