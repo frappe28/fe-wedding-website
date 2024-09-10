@@ -28,7 +28,7 @@ const form = ref({
   <VCard class="position-relative">
     <VCardText>
       <div class="mb-2">
-        <h5 class="text-h5 v-text-wrap-justify">
+        <h5 class="text-h5 v-text-wrap-justify" style="text-transform: capitalize !important;">
           Ciao {{ form.nome }} <span class="text-high-emphasis">🎉</span>
         </h5>
         <div class="text-body-1">
