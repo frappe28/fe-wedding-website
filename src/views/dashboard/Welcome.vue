@@ -32,7 +32,7 @@ const form = ref({
           Ciao {{ form.nome }} <span class="text-high-emphasis">🎉</span>
         </h5>
         <div class="text-body-1">
-          <span class="v-text-wrap-justify">E quindi ci sarai al nostro matrimonio? </span>
+          <span class="v-text-wrap-justify">E quindi, ci sarai al nostro matrimonio? </span>
         </div>
       </div>
       <VBtn size="small">
