@@ -8,13 +8,16 @@ onMounted(() => {
   //const { nome, cognome } = route.query;
   const nome = store.getters.getNome;
   const cognome = store.getters.getCognome;
+  const username = store.getters.getUsername;
   console.log({ nome, cognome });
   if (nome == null || nome == "" || cognome == null || cognome == "") {
     router.push({ name: 'welcome', query: {} });
   }
 
   let userSaluto = "amico";
-  if (route.query.username != null && route.query.username.trim() != "") {
+  if (username != null && username != "") {
+    userSaluto = username;
+  } else if (route.query.username != null && route.query.username.trim() != "") {
     userSaluto = route.query.username.trim();
   } else if (nome != null && nome != "") {
     userSaluto = nome;
