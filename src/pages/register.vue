@@ -45,6 +45,7 @@ async function submit() {
     form.value.email = "invalid_" + form.value.email;
   }
   console.log(JSON.stringify(form.value));
+  //TODO: ROTELLINA CARICAMENTO PER CHIAMATA A BACKEND
   const response = await confermaPresenza(form.value);
   console.log(response);
   router.push({ name: 'dashboard', query: { username: form.value.username } })

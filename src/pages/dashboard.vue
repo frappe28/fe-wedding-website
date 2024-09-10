@@ -14,6 +14,8 @@ import { onMounted, onUnmounted, ref } from 'vue'
 //le magie di checco
 import '../assets/styles/frasanz-dash.scss'
 
+//TODO GESTIRE FOCUS ALL'INIZIO DELLA PAGINA (SU IPHONE DI FRANCESCA NON VA)
+
 const targetDate = new Date('2025-05-14T00:00:00');
 const isCountdownFinished = ref(false);
 const timeRemainingDays = ref('');

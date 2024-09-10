@@ -12,6 +12,7 @@ import store from '../store/index'
 //le magie di checco
 import '../assets/styles/frasanz-login.scss'
 //todo fare in modo che la build per production renda i file illeggibili/indebuggabili
+//TODO GESTIRE FOCUS SUL CAMPO DI INPUT (apertura della tastiera occupa spazio modificando dimensioni dello schermo, non del DOM!!!)
 
 const form = ref({
   nome: '',
