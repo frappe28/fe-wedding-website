@@ -8,8 +8,9 @@ const API = axios.create({
 export const signIn = async(user) =>{
     let nome = user.nome.toLowerCase().trim();
     let cognome = user.cognome.toLowerCase().trim();
-    if (nome === "admin" && cognome === "admin") {
-        return {"state":true,"message":"Invitato!","data":{"cognome":"admin","id":"adminadmin","nome":"admin"}};
+    if ((nome === "admin" && cognome === "admin") || 
+        (nome === "francesco" && cognome === "sanzone")) {
+        return {"state":true,"message":"Invitato!","data":{"cognome":cognome,"id":nome+cognome,"nome":nome}};
     } else if (nome === "admin" && cognome === "password") {
         return {"state":false,"message":"Non Invitato"};
     } else {
