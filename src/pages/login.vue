@@ -7,7 +7,7 @@ import rings from '@images/pages/wedding-ring.png'
 import { useTheme } from 'vuetify'
 import { router } from '../plugins/router'
 import { signIn } from '../service/backend'
-import store from '../store/index'
+//import store from '../store/index'
 
 //le magie di checco
 import '../assets/styles/frasanz-login.scss'
@@ -21,8 +21,49 @@ const form = ref({
 
 let loginError = ref(false);
 
+onBeforeMount(() => {
+  console.log("onBeforeMount");
+
+  //ripulisco localstorage
+  localStorage.clear();
+});
+onMounted(() => {
+  console.log("onMounted");
+  try {
+    var primoDiv = document.getElementById('login-page');
+    setTimeout(() => VueScrollTo.scrollTo(primoDiv, 1000), 1);
+  } catch (e) {
+    //ce ne faremo una ragione
+  }
+});
+onUpdated(() => {
+  console.log("onUpdated");
+});
+onUnmounted(() => {
+  console.log("onUnmounted");
+});
+onBeforeUpdate(() => {
+  console.log("onBeforeUpdate");
+});
+onBeforeUnmount(() => {
+  console.log("onBeforeUnmount");
+});
+onErrorCaptured(() => {
+  console.log("onErrorCaptured");
+});
+onActivated(() => {
+  console.log("onActivated");
+});
+onDeactivated(() => {
+  console.log("onDeactivated");
+});
+onServerPrefetch(() => {
+  console.log("onServerPrefetch");
+});
+
 async function login() {
-  console.log(form.value);
+
+  //console.log(form.value);
   if ((form.value.nome !== null && form.value.cognome !== null)
     && (form.value.nome !== '' && form.value.cognome !== '')) {
     try {
@@ -32,17 +73,19 @@ async function login() {
       document.getElementById('global-loader-http').style.display = 'block';
       const response = await signIn({ nome: form.value.nome, cognome: form.value.cognome });
 
-      console.log("SignIn response: ", response);
+      //console.log("SignIn response: ", response);
       if (response.state) {
         loginError.value = false;
-        console.log('Sei invitato!');
-        store.dispatch('setAll', response.data);
-
+        //console.log('Sei invitato!');
+        //store.dispatch('setAll', response.data);
         //console.log('Recupero da store!');
         //console.log(store.getters.getAll); 
+        localStorage.setItem('signInData', JSON.stringify(response.data));
+        /*console.log('Recupero da LS! - login');
+        console.log(localStorage.getItem('signInData'));*/
         router.push({ name: 'dashboard', query: { /*nome: form.value.nome*/ } })
       } else {
-        console.log('a chi hai fregato il link?');
+        //console.log('a chi hai fregato il link?');
         loginError.value = true;
       }
     } catch (e) {
@@ -65,7 +108,7 @@ const authThemeMask = computed(() => {
 <template>
   <!-- eslint-disable vue/no-v-html -->
 
-  <div class="auth-wrapper d-flex align-center justify-center pa-4">
+  <div id="login-page" class="auth-wrapper d-flex align-center justify-center pa-4">
     <VCard class="auth-card pa-4 pt-7" max-width="448">
       <VCardItem class="justify-center">
         <template #prepend>

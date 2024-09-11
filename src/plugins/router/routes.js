@@ -1,18 +1,20 @@
 export const routes = [
-  //TODO path '/' deve portare a dashboard e non a LOGIN. poi dashboard in assenza di dati nello store deve riportare alla login o permettere di navigare
   //TODO refresh della pagina non deve dare ACCESS DENIED ma conservare la sessione.
+  /*TODO (non replicabile) capire perché a volte la rotta si incanta: 
+   - da login ha finito di girare la rotella con stato ok, 
+     l'url diventa dashboard ma a livello grafico sei ancora sul form di login 
+   - oppure da register finisci di mettere i dati li salvi finisce di girare la rotellina
+     l'url diventa dashboard ma sei ancora sul form. 
+----> PER LIMITARE LE CHIAMATE HTTP, conviene disabilitare il bottone 
+      di login / registrazione a valle della chiamata effettuata. 
+      se switcha di pagina non se ne accorge nessuno, 
+      se non switcha faranno un refresh o ci chiameranno!
   
-  { path: '/', redirect: '/welcome' },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () => import('@/pages/dashboard.vue'),
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: () => import('@/pages/register.vue')
-  },
+  effettuato un tentativo a modificare i vari router push con replace e back, 
+  ma bisogna fare ancora tante prove per vedere se così è rientrato davvero il bug.
+      */
+
+  { path: '/', redirect: '/dashboard' },
   {
     path: '/welcome',
     name: 'welcome',
@@ -32,4 +34,14 @@ export const routes = [
     //   },
     // ],
   },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('@/pages/dashboard.vue'),
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/pages/register.vue')
+  }
 ]

@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 
-const iban = 'IT32D0100504001000000003260 Intestato a: Francesca Deperte';
+const iban = 'IT32D0100504001000000003260 - Intestato a: Francesca Deperte';
 const showPopup = ref(false);
 
 const copyIbanToClipboard = () => {
   navigator.clipboard.writeText(iban)
     .then(() => {
-      console.log('IBAN copiato negli appunti!');
+      //console.log('IBAN copiato negli appunti!');
       showPopup.value = true;
 
       // Nascondi il pop-up dopo 3 secondi

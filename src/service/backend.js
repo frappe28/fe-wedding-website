@@ -8,8 +8,9 @@ const API = axios.create({
 export const signIn = async(user) =>{
     let nome = user.nome.toLowerCase().trim();
     let cognome = user.cognome.toLowerCase().trim();
-    if ((nome === "admin" && cognome === "admin") || 
-        (nome === "francesco" && cognome === "sanzone")) {
+    if ((nome === "admin" && cognome === "admin")
+        //|| (nome === "francesco" && cognome === "sanzone")
+       ) {
         return {"state":true,"message":"Invitato!","data":{"cognome":cognome,"id":nome+cognome,"nome":nome}};
     } else if (nome === "admin" && cognome === "password") {
         return {"state":false,"message":"Non Invitato"};
@@ -32,7 +33,7 @@ export const signIn = async(user) =>{
 }
 
 export const confermaPresenza = async(user) =>{
-    console.log(user);
+    //console.log(user);
     try {
         const input = {
                 id: user.nome + user.cognome,
@@ -45,7 +46,7 @@ export const confermaPresenza = async(user) =>{
                 username: user.username,
                 forestiero: user.forestiero
             };
-        console.log(input);
+        //console.log(input);
         const response = await API.post('/conferma-presenza', 
             input,
             {
