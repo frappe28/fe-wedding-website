@@ -260,12 +260,3 @@ function isValidEmail() {
   //word-break: break-all; /* Consente al testo di andare a capo a livello di carattere */
 }
 </style>
-<style>
-.invalid {
-  border-color: red;
-}
-
-#error {
-  color: red
-}
-</style>
