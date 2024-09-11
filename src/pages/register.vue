@@ -46,8 +46,10 @@ onBeforeMount(() => {
     if (data.intolleranze != null) {
       form.value.intolleranze = data.intolleranze;
     }
-    if (data.intolleranze_list != null) {
+    if (form.value.intolleranze == true && data.intolleranze_list != null) {
       form.value.intolleranze_list = data.intolleranze_list;
+    } else {
+      form.value.intolleranze_list = "";
     }
     if (data.email != null) {
       form.value.email = data.email;
@@ -89,15 +91,11 @@ async function submit() {
   let emailValida = true;
   if (form.value.email != null && form.value.email.trim() != "" && !isValidEmail()) {
     emailValida = false;
-    //TODO blocca il submit ed avvisa l'utente di aver inserito una mail non valida
-    //console.log("Email non valida: ", form.value.email);
-    //form.value.email = "invalid_" + form.value.email;
   }
   //console.log(JSON.stringify(form.value));
 
-
   if (!emailValida) {
-    //alert("L'indirizzo email inserito non è corretto.");
+    console.debug("email non valida");
     //non serve introdurre nuova logica, cliccando fuori dal campo uscirà l'errore sulla mail.
   } else {
     try {
@@ -190,6 +188,7 @@ function isValidEmail() {
               </VCol>
 
               <!-- Intolleranze -->
+              <!-- TODO capire perché da telefono l'autocomplete della mail ha riempito in automatico il field della lista intolleranze -->
               <VCol cols="12">
                 <div class="d-flex align-center mt-1 mb-4">
                   <VLabel for="intolleranze" style="opacity: 1;">
