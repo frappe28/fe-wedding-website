@@ -12,7 +12,6 @@ import { confermaPresenza } from '../service/backend'
 import { router } from '../plugins/router'
 //import store from '../store/index'
 var caricaPagina = false;
-var autofocus = false;
 onBeforeMount(() => {
 
   const route = useRoute();
@@ -65,7 +64,6 @@ onBeforeMount(() => {
 });
 onMounted(() => {
   if (caricaPagina) {
-    autofocus = form.value.username == null || form.value.username == '';
     try {
       var primoDiv = document.getElementById('nascondi-pagina-register');
       primoDiv.style.display = 'block';
