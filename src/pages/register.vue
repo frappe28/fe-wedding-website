@@ -201,7 +201,6 @@ function isValidEmail() {
               </VCol>
 
               <!-- Intolleranze -->
-              <!-- TODO capire perché da telefono l'autocomplete della mail ha riempito in automatico il field della lista intolleranze -->
               <VCol cols="12">
                 <div class="d-flex align-center mt-1 mb-4">
                   <VLabel for="intolleranze" style="opacity: 1;">
@@ -237,6 +236,8 @@ function isValidEmail() {
                 <VTextField v-model="form.telefono" placeholder="Telefono" id="tel" type="tel"
                   hint="si, probabilmente, anzi quasi sicuramente, abbiamo già questi dati, ma se ci conosci sai che siamo molto pigri e non ci andava di ricopiarli!" />
               </VCol>
+
+              <!-- TODO al click la tastiera non deve coprire il campo di input ma spostare il focus su di esso (deve essere visibile cosa si sta scrivendo) -->
               <!-- email -->
               <VCol cols="12">
                 <VTextField v-model="form.email" placeholder="Email" type="email" id="email_reg" @blur="onblur"
