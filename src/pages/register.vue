@@ -12,6 +12,7 @@ import { confermaPresenza } from '../service/backend'
 import { router } from '../plugins/router'
 //import store from '../store/index'
 var caricaPagina = false;
+var autofocus = false;
 onBeforeMount(() => {
 
   const route = useRoute();
@@ -64,6 +65,7 @@ onBeforeMount(() => {
 });
 onMounted(() => {
   if (caricaPagina) {
+    autofocus = form.value.username == null || form.value.username == '';
     try {
       var primoDiv = document.getElementById('nascondi-pagina-register');
       primoDiv.style.display = 'block';
@@ -98,6 +100,10 @@ async function submit() {
     console.debug("email non valida");
     //non serve introdurre nuova logica, cliccando fuori dal campo uscirà l'errore sulla mail.
   } else {
+    if (form.value.intolleranze == false || 
+        form.value.intolleranze_list == null || form.value.intolleranze_list == '' ) {
+      form.value.intolleranze_list = "";
+    }
     try {
       document.getElementById('global-loader-http').style.display = 'block';
 
@@ -175,16 +181,25 @@ function isValidEmail() {
         </VCardText>
 
         <VCardText>
-          <VForm @submit.prevent="() => { }">
+          <VForm @submit.prevent="() => { }" autocomplete="off">
             <VRow>
               <!-- Nome -->
-              <VCol cols="12">
+              <VCol cols=" 12">
                 <VTextField v-model="form.nome_cognome" disabled />
               </VCol>
 
+              <!-- PASSWORD HIDDEN - inserita per prevenire suggerimenti password su username -->
+              <!-- rimossa perché iniziava a suggerire username anche da browser oltre che cellulare
+              <VCol cols="12" style="display: none;">
+                <VTextField v-model="form.psw" placeholder="Password" id="psw" type="password" style="display: none;"
+                  autocomplete="false" />
+              </VCol>-->
+
               <!-- Username -->
+              <!-- rinominato in nickname per prevenire AUTOCOMPLETAMENTO -->
               <VCol cols="12">
-                <VTextField v-model="form.username" label="Username" autofocus />
+                <VTextField v-model="form.username" placeholder="Nickname" id="niclname" type="text"
+                  autocomplete="false" />
               </VCol>
 
               <!-- Intolleranze -->
@@ -196,7 +211,8 @@ function isValidEmail() {
                   </VLabel>
                   <VCheckbox id="intolleranze" v-model="form.intolleranze" inline />
                 </div>
-                <VTextField v-if="form.intolleranze" v-model="form.intolleranze_list" label="Intolleranze/Allergie"
+                <VTextField v-if="form.intolleranze" v-model="form.intolleranze_list" id="intolleranze_text"
+                  placeholder="Intolleranze/Allergie" type="text"
                   hint="Si intendono le intolleranze/allergie alimentari: sappiamo tutti che solo la sposa sopporta frasanz" />
               </VCol>
 
@@ -220,13 +236,13 @@ function isValidEmail() {
 
               <!-- telefono -->
               <VCol cols="12">
-                <VTextField v-model="form.telefono" label="Telefono" type="tel"
+                <VTextField v-model="form.telefono" placeholder="Telefono" id="tel" type="tel"
                   hint="si, probabilmente, anzi quasi sicuramente, abbiamo già questi dati, ma se ci conosci sai che siamo molto pigri e non ci andava di ricopiarli!" />
               </VCol>
               <!-- email -->
               <VCol cols="12">
-                <VTextField v-model="form.email" label="Email" type="email" id="email" @blur="onblur" @focus="onfocus"
-                  :error-messages="erroreMail" />
+                <VTextField v-model="form.email" placeholder="Email" type="email" id="email_reg" @blur="onblur"
+                  @focus="onfocus" :error-messages="erroreMail" />
               </VCol>
 
               <VCol cols="12">

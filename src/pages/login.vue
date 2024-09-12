@@ -22,13 +22,13 @@ const form = ref({
 let loginError = ref(false);
 
 onBeforeMount(() => {
-  console.log("onBeforeMount");
+  //console.log("onBeforeMount");
 
   //ripulisco localstorage
   localStorage.clear();
 });
 onMounted(() => {
-  console.log("onMounted");
+  //console.log("onMounted");
   try {
     var primoDiv = document.getElementById('login-page');
     setTimeout(() => VueScrollTo.scrollTo(primoDiv, 1000), 1);
@@ -37,28 +37,28 @@ onMounted(() => {
   }
 });
 onUpdated(() => {
-  console.log("onUpdated");
+  //console.log("onUpdated");
 });
 onUnmounted(() => {
-  console.log("onUnmounted");
+  //console.log("onUnmounted");
 });
 onBeforeUpdate(() => {
-  console.log("onBeforeUpdate");
+  //console.log("onBeforeUpdate");
 });
 onBeforeUnmount(() => {
-  console.log("onBeforeUnmount");
+  //console.log("onBeforeUnmount");
 });
 onErrorCaptured(() => {
-  console.log("onErrorCaptured");
+  //console.log("onErrorCaptured");
 });
 onActivated(() => {
-  console.log("onActivated");
+  //console.log("onActivated");
 });
 onDeactivated(() => {
-  console.log("onDeactivated");
+  //console.log("onDeactivated");
 });
 onServerPrefetch(() => {
-  console.log("onServerPrefetch");
+  //console.log("onServerPrefetch");
 });
 
 async function login() {
