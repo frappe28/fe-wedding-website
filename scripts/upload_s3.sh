@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Imposta le variabili
-AWS_PROFILE=wedding
-AWS_REGION=eu-west-1
+export AWS_PROFILE=wedding
+export AWS_REGION=eu-west-1
 BUCKET_NAME="dev-francis-wedding-frontend"
 DISTRIBUTION_ID="ENWYOMI0LW549"  # Inserisci l'ID della tua distribuzione CloudFront
 BUILD_DIR="dist"

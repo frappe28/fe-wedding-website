@@ -8,7 +8,8 @@ const user = {
       email: '',
       telefono: '',
       username: '',//a scelta dell'utente
-      forestiero: ''
+      forestiero: '',
+      invito: ''
   },
   mutations: {
     setId (state, id) {
@@ -37,6 +38,9 @@ const user = {
     },
     setForestiero (state, forestiero) {
       state.forestiero = forestiero;
+    },
+    setInvito (state, invito) {
+      state.invito = invito;
     }
   },
   actions: {
@@ -67,8 +71,11 @@ const user = {
     setForestiero ({ commit }, forestiero) {
       commit('setForestiero', forestiero);
     },
+    setInvito ({ commit }, invito) {
+      commit('setInvito', invito);
+    },
     setAll ({ commit }, data
-      //{ id, nome, cognome, intolleranze, intolleranze_list, email, telefono, username, forestiero}
+      //{ id, nome, cognome, intolleranze, intolleranze_list, email, telefono, username, forestiero, invito}
     ) {
       if (null != data) {
         commit('setId',               data.id);
@@ -80,6 +87,7 @@ const user = {
         commit('setTelefono',         data.telefono);
         commit('setUsername',         data.username);
         commit('setForestiero',       data.forestiero);
+        commit('setInvito',           data.invito);
       }
     }
   },
@@ -110,6 +118,9 @@ const user = {
     },
     getForestiero: (state) => {
       return state.forestiero;
+    },
+    getInvito: (state) => {
+      return state.invito;
     },
     getAll: (state) => {
        //valutare se ri-costruire l'oggetto da restituire per rimuovere o aggiungere qualcosa.

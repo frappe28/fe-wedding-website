@@ -6,7 +6,6 @@ import Countdown from '@/views/dashboard/Countdown.vue'
 import Iban from '@/views/dashboard/Iban.vue'
 import LibrettoMessa from '@/views/dashboard/LibrettoMessa.vue'
 import MappaChiesa from '@/views/dashboard/MappaChiesa.vue'
-import MappaLocation from '@/views/dashboard/MappaLocation.vue'
 import Welcome from '@/views/dashboard/Welcome.vue'
 import logo from '@images/pages/logo3.png'
 import { onMounted, onUnmounted, ref } from 'vue'
@@ -14,6 +13,8 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { router } from '../plugins/router'
 
 //le magie di checco
+import MappaLocationDopoFesta from '@/views/dashboard/MappaLocationDopoFesta.vue'
+import MappaLocationSala from '@/views/dashboard/MappaLocationSala.vue'
 import '../assets/styles/frasanz-dash.scss'
 
 //TODO GESTIRE FOCUS ALL'INIZIO DELLA PAGINA (SU IPHONE DI FRANCESCA NON VA)
@@ -37,6 +38,7 @@ const calculateTimeRemaining = () => {
 
 let countdownInterval;
 var caricaPagina = false;
+let invito = 'chiesa';
 onBeforeMount(() => {
 
   const route = useRoute();
@@ -53,10 +55,11 @@ onBeforeMount(() => {
   const nome = data.nome;
   const cognome = data.cognome;
   const username = data.username;
-  /*
+  invito = data.invito;
+
   console.log('Recupero da LS! - dashboard');
-  console.log(data);
-  console.log({ nome, cognome, username });*/
+  console.log('all', data);
+  console.log('data', { nome, cognome, username, invito });
 
   if (nome == null || nome == "" || cognome == null || cognome == "") {
     //router.push({ name: 'welcome', query: {} });
@@ -125,8 +128,12 @@ onUnmounted(() => {
         <MappaChiesa />
       </VCol>
 
-      <VCol cols="12" md="6">
-        <MappaLocation />
+      <VCol cols="12" md="6" v-if="invito === 'dopofesta'">
+        <MappaLocationDopoFesta />
+      </VCol>
+
+      <VCol cols="12" md="6" v-if="invito === 'sala'">
+        <MappaLocationSala />
       </VCol>
 
       <VCol cols="12">

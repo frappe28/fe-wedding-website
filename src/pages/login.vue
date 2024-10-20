@@ -72,6 +72,7 @@ async function login() {
       // Mostra il loader globale
       document.getElementById('global-loader-http').style.display = 'block';
       const response = await signIn({ nome: form.value.nome, cognome: form.value.cognome });
+      console.log('login response', response);
 
       //console.log("SignIn response: ", response);
       if (response.state) {

@@ -11,7 +11,7 @@ export const signIn = async(user) =>{
     if ((nome === "admin" && cognome === "admin")
         || (nome === "francesco" && cognome === "sanzone")
        ) {
-        return {"state":true,"message":"Invitato!","data":{"cognome":cognome,"id":nome+cognome,"nome":nome}};
+        return {"state":true,"message":"Invitato!","data":{"cognome":cognome,"id":nome+cognome,"nome":nome, invito: "sala"}};
     } else if (nome === "admin" && cognome === "password") {
         return {"state":false,"message":"Non Invitato"};
     } else {
