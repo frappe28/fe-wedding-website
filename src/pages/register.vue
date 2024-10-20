@@ -7,15 +7,11 @@ import rings from '@images/rings.svg?raw'
 import { useRoute } from 'vue-router'
 import { useTheme } from 'vuetify'
 import { confermaPresenza } from '../service/backend'
-
-
 import { router } from '../plugins/router'
-//import store from '../store/index'
+
 var caricaPagina = false;
 onBeforeMount(() => {
-
   const route = useRoute();
-  //console.log(route);
   try {
     document.getElementById('nascondi-pagina-register').style.display = 'none';
   } catch (e) { }
@@ -28,13 +24,10 @@ onBeforeMount(() => {
   const nome = data.nome;
   const cognome = data.cognome;
   const username = data.username;
-  /*console.log('Recupero da LS! - dashboard register');
-  console.log(data);
-  console.log({ nome, cognome });*/
 
   if (nome == null || nome == "" || cognome == null || cognome == "") {
-    //router.push({ name: 'welcome', query: {} });
-    router.replace({ path: '/welcome' });  } else {
+    router.replace({ path: '/welcome' });
+  } else {
     caricaPagina = true;
   }
 
@@ -48,8 +41,18 @@ onBeforeMount(() => {
     }
     if (form.value.intolleranze == true && data.intolleranze_list != null) {
       form.value.intolleranze_list = data.intolleranze_list;
+      data.intolleranze_list.forEach(intolleranza => {
+        if (!intolleranzeDisponibili.includes(intolleranza)) {
+          form.value.altroAttivo = true;
+          form.value.altraIntolleranza += intolleranza;
+          const index = form.value.intolleranze_list.indexOf(form.value.altraIntolleranza);
+          if (index >= 0) {
+            form.value.intolleranze_list.splice(index, 1);
+          }
+        }
+      });
     } else {
-      form.value.intolleranze_list = "";
+      form.value.intolleranze_list = [];
     }
     if (data.email != null) {
       form.value.email = data.email;
@@ -62,13 +65,13 @@ onBeforeMount(() => {
     }
   }
 });
+
 onMounted(() => {
   if (caricaPagina) {
     try {
       var primoDiv = document.getElementById('nascondi-pagina-register');
       primoDiv.style.display = 'block';
       setTimeout(() => VueScrollTo.scrollTo(primoDiv, 1000), 1);
-      //console.log("display: ", document.getElementById('nascondi-pagina-register').style.display);
     } catch (e) {
       console.log("element not found: nascondi-pagina-register");
     }
@@ -81,79 +84,99 @@ const form = ref({
   cognome: '',
   username: '',
   intolleranze: false,
-  intolleranze_list: '',
+  intolleranze_list: [],
   email: '',
   telefono: '',
-  forestiero: false
-})
+  forestiero: false,
+  altroAttivo: false,
+  altraIntolleranza: ''
+});
 
 async function submit() {
   let emailValida = true;
   if (form.value.email != null && form.value.email.trim() != "" && !isValidEmail()) {
     emailValida = false;
   }
-  //console.log(JSON.stringify(form.value));
 
   if (!emailValida) {
     console.debug("email non valida");
-    //non serve introdurre nuova logica, cliccando fuori dal campo uscirà l'errore sulla mail.
   } else {
-    if (form.value.intolleranze == false || 
-        form.value.intolleranze_list == null || form.value.intolleranze_list == '' ) {
-      form.value.intolleranze_list = "";
+    if (form.value.intolleranze == false ||
+      form.value.intolleranze_list == null || form.value.intolleranze_list.length === 0) {
+      form.value.intolleranze_list = [];
+    }
+    if (form.value.intolleranze && form.value.altroAttivo === true && form.value.altraIntolleranza != null && form.value.altraIntolleranza != '') {
+      form.value.intolleranze_list.push(form.value.altraIntolleranza);
     }
     try {
       document.getElementById('global-loader-http').style.display = 'block';
-
-      const response = await confermaPresenza(form.value);
-      //console.log(response);
-
+      await confermaPresenza(form.value);
       localStorage.setItem('signInData', JSON.stringify(form.value));
-      /*console.log('Recupero da LS! - register');
-      console.log(localStorage.getItem('signInData'));*/
-      //router.push({ name: 'dashboard', query: { /*username: form.value.username*/ } })
       router.back();
     } catch (e) {
       console.log("Register ERR: ", e);
     } finally {
-      // Nascondi il loader globale
       document.getElementById('global-loader-http').style.display = 'none';
     }
   }
 }
-var erroreMail = ref(""); // Usa 'ref' per renderlo reattivo
+
+var erroreMail = ref("");
 
 async function onfocus() {
-  erroreMail.value = ""; // Nessun errore
+  erroreMail.value = "";
 }
+
 async function onblur() {
   let emailValida = true;
-
-  // Verifica se l'email è presente e valida
   if (form.value.email && form.value.email.trim() !== "" && !isValidEmail()) {
     emailValida = false;
   }
 
-  // Se l'email non è valida, mostra il messaggio di errore
   if (!emailValida) {
     erroreMail.value = "indirizzo email inserito non valido.";
   } else {
-    erroreMail.value = ""; // Nessun errore
+    erroreMail.value = "";
   }
 }
-const vuetifyTheme = useTheme()
 
+const vuetifyTheme = useTheme();
 const authThemeMask = computed(() => {
-  return vuetifyTheme.global.name.value === 'light' ? authV1MaskLight : authV1MaskDark
-})
+  return vuetifyTheme.global.name.value === 'light' ? authV1MaskLight : authV1MaskDark;
+});
 
 function isValidEmail() {
   return /^[^@]+@\w+(\.\w+)+\w$/.test(form.value.email.trim());
 }
+
+const intolleranzeDisponibili = ['Glutine', 'Lattosio', 'Nichel', 'Frutta secca', 'Crostacei', 'Uova', 'Altro'];
+
+
+function toggleIntolleranza(intolleranza) {
+  if (intolleranza === 'Altro') {
+    form.value.altroAttivo = !form.value.altroAttivo; // Toggle il campo "Altro"
+    if (!form.value.altroAttivo) {
+      form.value.altraIntolleranza = ''; // Se si deseleziona, rimuove il valore
+    }
+  } else {
+    const index = form.value.intolleranze_list.indexOf(intolleranza);
+    if (index === -1) {
+      form.value.intolleranze_list.push(intolleranza);
+    } else {
+      form.value.intolleranze_list.splice(index, 1);
+    }
+  }
+}
+
+function chipClass(intolleranza) {
+  if (intolleranza === 'Altro') {
+    return form.value.altroAttivo ? 'chip-selected' : '';
+  }
+  return form.value.intolleranze_list.includes(intolleranza) ? 'chip-selected' : '';
+}
 </script>
 
 <template>
-  <!-- eslint-disable vue/no-v-html -->
   <div id="nascondi-pagina-register" style="display: none;">
     <div class="auth-wrapper d-flex align-center justify-center pa-4">
       <VCard class="auth-card pa-4 pt-7" max-width="448">
@@ -182,10 +205,9 @@ function isValidEmail() {
           <VForm @submit.prevent="() => { }" autocomplete="off">
             <VRow>
               <!-- Nome -->
-              <VCol cols=" 12">
+              <VCol cols="12">
                 <VTextField v-model="form.nome_cognome" disabled />
               </VCol>
-
               <!-- PASSWORD HIDDEN - inserita per prevenire suggerimenti password su username -->
               <!-- rimossa perché iniziava a suggerire username anche da browser oltre che cellulare
               <VCol cols="12" style="display: none;">
@@ -208,9 +230,19 @@ function isValidEmail() {
                   </VLabel>
                   <VCheckbox id="intolleranze" v-model="form.intolleranze" inline />
                 </div>
-                <VTextField v-if="form.intolleranze" v-model="form.intolleranze_list" id="intolleranze_text"
-                  placeholder="Intolleranze/Allergie" type="text"
-                  hint="Si intendono le intolleranze/allergie alimentari: sappiamo tutti che solo la sposa sopporta frasanz" />
+                <div v-if="form.intolleranze" class="text-center">
+                  <h4>Si intendono le intolleranze/allergie alimentari: sappiamo tutti che solo la sposa
+                    sopporta frasanz</h4>
+                  <VChip v-for="intolleranza in intolleranzeDisponibili" :key="intolleranza"
+                    :class="chipClass(intolleranza)" variant="outlined" class="mr-2 mb-2 "
+                    @click="toggleIntolleranza(intolleranza)">
+                    {{ intolleranza }}
+                  </VChip>
+
+                  <!-- Campo per "Altro" -->
+                  <VTextField v-if="form?.altroAttivo" v-model="form.altraIntolleranza"
+                    placeholder="Specificare altre intolleranze" type="text" />
+                </div>
               </VCol>
 
 
@@ -272,5 +304,13 @@ function isValidEmail() {
   word-wrap: break-word;
   /* Consente al testo di andare a capo a livello di parola */
   //word-break: break-all; /* Consente al testo di andare a capo a livello di carattere */
+}
+</style>
+
+<style scoped>
+.chip-selected {
+  background-color: #56BC6C;
+  /* Cambia il colore della chip quando selezionata */
+  color: white;
 }
 </style>
