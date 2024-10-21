@@ -8,6 +8,13 @@ const API = axios.create({
 export const signIn = async(user) =>{
     let nome = user.nome.toLowerCase().trim();
     let cognome = user.cognome.toLowerCase().trim();
+    let params = {
+        nome,
+        cognome
+    }
+    if(user.anno){
+        params.anno = user.anno.trim();
+    }
     if ((nome === "admin" && cognome === "admin")
         || (nome === "francesco" && cognome === "sanzone")
        ) {
@@ -18,10 +25,7 @@ export const signIn = async(user) =>{
         try {
             const response = await API.get('/controllo-invitato', 
                 {
-                    params:{
-                        nome: nome,
-                        cognome: cognome
-                    }
+                    params
                 }
             )
             return response.data;

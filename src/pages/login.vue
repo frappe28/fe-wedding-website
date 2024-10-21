@@ -17,9 +17,11 @@ import '../assets/styles/frasanz-login.scss'
 const form = ref({
   nome: '',
   cognome: '',
+  anno: null
 })
 
 let loginError = ref(false);
+let warningOmonimi = ref(false);
 
 onBeforeMount(() => {
   //console.log("onBeforeMount");
@@ -69,25 +71,30 @@ async function login() {
     try {
       //reset modale di errore
       loginError.value = false;
+      warningOmonimi.value = false;
       // Mostra il loader globale
       document.getElementById('global-loader-http').style.display = 'block';
-      const response = await signIn({ nome: form.value.nome, cognome: form.value.cognome });
+      const params = { nome: form.value.nome, cognome: form.value.cognome }
+      if (form.value.anno) {
+        params['anno'] = form.value.anno
+      }
+      const response = await signIn(params);
       console.log('login response', response);
-
-      //console.log("SignIn response: ", response);
-      if (response.state) {
+      if (response.state && response.data.id) {
         loginError.value = false;
-        //console.log('Sei invitato!');
-        //store.dispatch('setAll', response.data);
-        //console.log('Recupero da store!');
-        //console.log(store.getters.getAll); 
+        warningOmonimi.value = false;
+
         localStorage.setItem('signInData', JSON.stringify(response.data));
-        /*console.log('Recupero da LS! - login');
-        console.log(localStorage.getItem('signInData'));*/
-        router.push({ name: 'dashboard', query: { /*nome: form.value.nome*/ } })
+
+        router.replace({ path: '/dashboard' })
+      } else if (response.state === false && response.data.length > 1) {
+        //OMONIMI
+        loginError.value = false;
+        warningOmonimi.value = true;
       } else {
-        //console.log('a chi hai fregato il link?');
-        loginError.value = true;
+        //ERRORI
+        loginError.value = true
+        warningOmonimi.value = false;
       }
     } catch (e) {
       console.log("ERR: ", e);
@@ -135,6 +142,13 @@ const authThemeMask = computed(() => {
             <VCol cols="12">
               <VTextField v-model="form.cognome" label="Cognome" type="text" />
             </VCol>
+            <!-- gestione omonimi -->
+            <VAlert icon="$warning" closable title="Ehi sembra che ci sia un tuo omonimo!"
+              text="Per favore insersci anche la tua data di nascita" type="warning" class="custom-alert"
+              v-if="warningOmonimi"></VAlert>
+            <VCol cols="12" v-if="warningOmonimi">
+              <VTextField v-model="form.anno" label="Anno di nascita" type="text" />
+            </VCol>
 
             <!-- remember me checkbox -->
             <div class="d-flex align-center justify-space-between flex-wrap mt-1 mb-4" />
@@ -146,6 +160,7 @@ const authThemeMask = computed(() => {
               <VAlert icon="$warning" closable title="Ehi a chi hai fregato il link?"
                 text="Scherziamo, ma se pensi ci sia qualche problema, scrivici o chiamaci!" type="error"
                 class="custom-alert" v-if="loginError"></VAlert>
+
             </VCol>
           </VRow>
         </VForm>
