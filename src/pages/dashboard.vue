@@ -57,10 +57,6 @@ onBeforeMount(() => {
   const username = data.username;
   invito = data.invito;
 
-  console.log('Recupero da LS! - dashboard');
-  console.log('all', data);
-  console.log('data', { nome, cognome, username, invito });
-
   if (nome == null || nome == "" || cognome == null || cognome == "") {
     //router.push({ name: 'welcome', query: {} });
     router.replace({ path: '/welcome' });

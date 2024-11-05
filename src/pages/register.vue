@@ -24,6 +24,7 @@ onBeforeMount(() => {
   const nome = data.nome;
   const cognome = data.cognome;
   const username = data.username;
+  const invito = data.invito;
 
   if (nome == null || nome == "" || cognome == null || cognome == "") {
     router.replace({ path: '/welcome' });
@@ -35,6 +36,7 @@ onBeforeMount(() => {
     form.value.nome = nome;
     form.value.cognome = cognome;
     form.value.username = username;
+    form.value.invito = invito;
     form.value.nome_cognome = `${form.value.nome} ${form.value.cognome}`;
     if (data.intolleranze != null) {
       form.value.intolleranze = data.intolleranze;
@@ -60,9 +62,9 @@ onBeforeMount(() => {
     if (data.telefono != null) {
       form.value.telefono = data.telefono;
     }
-    if (data.forestiero != null) {
-      form.value.forestiero = data.forestiero;
-    }
+    // if (data.forestiero != null) {
+    //   form.value.forestiero = data.forestiero;
+    // }
   }
 });
 
@@ -87,12 +89,14 @@ const form = ref({
   intolleranze_list: [],
   email: '',
   telefono: '',
-  forestiero: false,
+  invito: '',
+  //forestiero: false,
   altroAttivo: false,
-  altraIntolleranza: ''
+  altraIntolleranza: '',
+  conferma: 'no'
 });
 
-async function submit() {
+async function submit(conferma) {
   let emailValida = true;
   if (form.value.email != null && form.value.email.trim() != "" && !isValidEmail()) {
     emailValida = false;
@@ -109,7 +113,9 @@ async function submit() {
       form.value.intolleranze_list.push(form.value.altraIntolleranza);
     }
     try {
+      //TODO -> aggiungi opacità al bg del loader 
       document.getElementById('global-loader-http').style.display = 'block';
+      form.value.conferma = conferma ? 'si' : 'no';
       await confermaPresenza(form.value);
       localStorage.setItem('signInData', JSON.stringify(form.value));
       router.back();
@@ -218,7 +224,7 @@ function chipClass(intolleranza) {
               <!-- Username -->
               <!-- rinominato in nickname per prevenire AUTOCOMPLETAMENTO -->
               <VCol cols="12">
-                <VTextField v-model="form.username" placeholder="Nickname" id="niclname" type="text"
+                <VTextField v-model="form.username" placeholder="Nickname" id="nickname" type="text"
                   autocomplete="false" />
               </VCol>
 
@@ -246,7 +252,7 @@ function chipClass(intolleranza) {
               </VCol>
 
 
-              <!-- forestiero -->
+              <!-- forestiero 
               <VCol cols="12">
                 <div class="d-flex align-center mt-1 mb-4">
                   <VLabel for="forestiero" style="opacity: 1;">
@@ -255,7 +261,7 @@ function chipClass(intolleranza) {
                   <VCheckbox id="forestiero" v-model="form.forestiero" inline />
                 </div>
 
-              </VCol>
+              </VCol>-->
 
               <VCardText class="pt-2">
                 <h5 class="text-h5 font-weight-semibold mb-1" style="text-wrap: wrap;">
@@ -277,9 +283,15 @@ function chipClass(intolleranza) {
               </VCol>
 
               <VCol cols="12">
-                <VBtn block type="submit" @click="submit">
-                  Conferma tua presenza!
+                <VBtn block type="submit" @click="submit(true)">
+                  Conferma tua presenza! 😍
                 </VBtn>
+              </VCol>
+              <VCol cols="12" style="text-align: center;">
+                <a href="#" @click.prevent="submit(false)" style="text-decoration: none; color: #9d1212;">
+                  <span style="text-decoration: underline; font-size: 0.85rem">Purtroppo non potrò
+                    partecipare</span> 🥲
+                </a>
               </VCol>
 
             </VRow>

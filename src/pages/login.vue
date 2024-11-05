@@ -22,6 +22,7 @@ const form = ref({
 
 let loginError = ref(false);
 let warningOmonimi = ref(false);
+let responseSignInOmonimi = null;
 
 onBeforeMount(() => {
   //console.log("onBeforeMount");
@@ -76,25 +77,28 @@ async function login() {
       document.getElementById('global-loader-http').style.display = 'block';
       const params = { nome: form.value.nome, cognome: form.value.cognome }
       if (form.value.anno) {
-        params['anno'] = form.value.anno
+        params['anno'] = form.value.anno;
       }
-      const response = await signIn(params);
+      const response = await signIn(params, responseSignInOmonimi);
+      responseSignInOmonimi = null;
       console.log('login response', response);
       if (response.state && response.data.id) {
         loginError.value = false;
         warningOmonimi.value = false;
 
         localStorage.setItem('signInData', JSON.stringify(response.data));
-
-        router.replace({ path: '/dashboard' })
-      } else if (response.state === false && response.data.length > 1) {
+        router.replace({ path: '/dashboard' });
+      } else if (response.state === false && response.data != null && response.data.length > 1) {
         //OMONIMI
         loginError.value = false;
         warningOmonimi.value = true;
+        form.value.anno = null;
+        responseSignInOmonimi = response.data;
       } else {
         //ERRORI
         loginError.value = true
         warningOmonimi.value = false;
+        form.value.anno = null;
       }
     } catch (e) {
       console.log("ERR: ", e);

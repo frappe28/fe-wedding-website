@@ -1,20 +1,13 @@
 <script setup>
 import { onBeforeMount } from 'vue';
 import { router } from '../../plugins/router';
-//import store from '../../store/index';
 
 
 onBeforeMount(() => { });
 onMounted(() => {
   var caricaPagina = true;
   const route = useRoute();
-  //console.log(route);
-  //const { nome, cognome } = route.query;
-  /*const nome = store.getters.getNome;
-  const cognome = store.getters.getCognome;
-  const username = store.getters.getUsername;
-  console.log({ nome, cognome });
-  */
+
   let data = {};
   try {
     if (localStorage.getItem("signInData")) {
@@ -24,6 +17,7 @@ onMounted(() => {
   const nome = data.nome;
   const cognome = data.cognome;
   const username = data.username;
+
   /*console.log('Recupero da LS! - dashboard welcome');
   console.log(data);
   console.log({ nome, cognome, username });*/
@@ -47,6 +41,9 @@ onMounted(() => {
     form.value.nome = nome;
     form.value.cognome = cognome;
     form.value.nome_cognome = `${form.value.nome} ${form.value.cognome}`;
+    invito.value = data.invito;
+    form.value.conferma = data.conferma;
+    labelBtn.value = form.value.conferma === 'si' ? 'Aggiorna i miei dati 💌' : 'Conferma la tua presenza 💌';
   }
 
 });
@@ -54,7 +51,10 @@ const form = ref({
   nome_cognome: '',
   nome: '',
   cognome: '',
+  conferma: '',
 })
+const invito = ref();
+const labelBtn = ref();
 
 async function registrati() {
   //console.log("Conferma la tua presenza");
@@ -81,8 +81,8 @@ async function registrati() {
           <span class="v-text-wrap-justify">E quindi, ci sarai al nostro matrimonio? </span>
         </div>
       </div>
-      <VBtn size="small" @click="registrati">
-        Conferma la tua presenza 💌
+      <VBtn size="small" @click="registrati" v-if="invito === 'sala' || invito === 'dopofesta'">
+        {{ labelBtn }}
       </VBtn>
     </VCardText>
   </VCard>
