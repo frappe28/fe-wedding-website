@@ -52,7 +52,7 @@ onMounted(() => {
     else if (data.invito === 'dopofesta')
       labelWelcome.value = 'Scateniamoci insieme! Il dopofesta ti attende!';
     else
-      labelWelcome.value = 'Sii con noi nel momento del grande "si"!';
+      labelWelcome.value = 'Sii con noi nel momento del grande "si"!'; // TODO far capire che può partecipare solo in chiesa
   }
 
 });
@@ -103,13 +103,13 @@ async function registraFiglio(figlioId) {
           <span class="v-text-wrap-justify">{{ labelWelcome }} </span>
         </div>
       </div>
-      <VBtn class="mr-2" size="small" @click="registrati" v-if="invito === 'sala' || invito === 'dopofesta'">
+      <VBtn class="mr-2 mt-2" size="small" @click="registrati" v-if="invito === 'sala' || invito === 'dopofesta'">
         {{ labelBtn }}
       </VBtn>
 
       <!-- Generazione dinamica dei bottoni per ogni figlio -->
       <VBtn v-if="form?.figliId != null && form?.figliId.length > 0" v-for="(figlio, index) in form?.figliId"
-        :key="figlio" class="mr-2" size="small" @click="registraFiglio(figlio.id)">
+        :key="figlio" class="mr-2 mt-2" size="small" @click="registraFiglio(figlio.id)">
         <!-- TODO metti un'icona diversa per i figli -->
         Registra {{ figlio.nome }} 🧸
       </VBtn>
