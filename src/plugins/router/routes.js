@@ -44,4 +44,10 @@ export const routes = [
     name: 'register',
     component: () => import('@/pages/register.vue')
   }
+  ,
+  {
+    path: '/registraFiglio',
+    name: 'registraFiglio',
+    component: () => import('@/pages/registraFiglio.vue')
+  }
 ]

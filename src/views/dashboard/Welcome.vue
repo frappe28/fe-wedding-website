@@ -42,6 +42,9 @@ onMounted(() => {
     form.value.cognome = cognome;
     form.value.nome_cognome = `${form.value.nome} ${form.value.cognome}`;
     invito.value = data.invito;
+
+    form.value.figliId = data.figliId;
+
     form.value.conferma = data.conferma;
     labelBtn.value = form.value.conferma === 'si' ? 'Aggiorna i miei dati 💌' : 'Conferma la tua presenza 💌';
     if (data.invito === 'sala')
@@ -57,7 +60,8 @@ const form = ref({
   nome_cognome: '',
   nome: '',
   cognome: '',
-  conferma: ''
+  conferma: '',
+  figliId: null
 })
 const invito = ref();
 const labelBtn = ref();
@@ -69,6 +73,17 @@ async function registrati() {
     && (form.value.nome !== '' && form.value.cognome !== '')) {
     try {
       router.push({ name: 'register', query: {} })
+    } catch (e) {
+      console.log("ERR: ", e);
+    }
+  }
+}
+
+async function registraFiglio(figlioId) {
+  if ((form.value.nome !== null && form.value.cognome !== null)
+    && (form.value.nome !== '' && form.value.cognome !== '')) {
+    try {
+      router.push({ name: 'registraFiglio', query: { figlioId } })
     } catch (e) {
       console.log("ERR: ", e);
     }
@@ -88,8 +103,15 @@ async function registrati() {
           <span class="v-text-wrap-justify">{{ labelWelcome }} </span>
         </div>
       </div>
-      <VBtn size="small" @click="registrati" v-if="invito === 'sala' || invito === 'dopofesta'">
+      <VBtn class="mr-2" size="small" @click="registrati" v-if="invito === 'sala' || invito === 'dopofesta'">
         {{ labelBtn }}
+      </VBtn>
+
+      <!-- Generazione dinamica dei bottoni per ogni figlio -->
+      <VBtn v-if="form?.figliId != null && form?.figliId.length > 0" v-for="(figlio, index) in form?.figliId"
+        :key="figlio" class="mr-2" size="small" @click="registraFiglio(figlio.id)">
+        <!-- TODO metti un'icona diversa per i figli -->
+        Registra {{ figlio.nome }} 🧸
       </VBtn>
     </VCardText>
   </VCard>

@@ -7,43 +7,46 @@ import rings from '@images/rings.svg?raw'
 import { useRoute } from 'vue-router'
 import { useTheme } from 'vuetify'
 import { router } from '../plugins/router'
-import { confermaPresenza } from '../service/backend'
+import { confermaPresenza, getInvitato } from '../service/backend'
 
 var caricaPagina = false;
-onBeforeMount(() => {
+let onBeforeMountComplete = ref(false);
+
+onBeforeMount(async () => {
   const route = useRoute();
   try {
-    document.getElementById('nascondi-pagina-register').style.display = 'none';
+    document.getElementById('nascondi-pagina-register-figlio').style.display = 'none';
   } catch (e) { }
-  let data = {};
+
+  let figlio = null;
   try {
-    if (localStorage.getItem("signInData")) {
-      data = JSON.parse(localStorage.getItem("signInData"));
+    if (route.query.figlioId) {
+      figlio = (await getInvitato(route.query.figlioId)).data;
+      console.log(figlio);
     }
   } catch (e) { }
-  const nome = data.nome;
-  const cognome = data.cognome;
-  const username = data.username;
-  const invito = data.invito;
-
-  if (nome == null || nome == "" || cognome == null || cognome == "") {
-    router.replace({ path: '/welcome' });
+  if (figlio == null || figlio.nome == null || figlio.nome == "" || figlio.cognome == null || figlio.cognome == "") {
+    router.replace({ path: '/dashboard' });
+    // TODO inserire un toast message se si spacca qualcosa
   } else {
     caricaPagina = true;
   }
-
+  console.log('tutto ok');
+  console.log(caricaPagina);
   if (caricaPagina) {
-    form.value.nome = nome;
-    form.value.cognome = cognome;
-    form.value.username = username;
-    form.value.invito = invito;
+    form.value.nome = figlio.nome;
+    form.value.cognome = figlio.cognome;
+    form.value.username = figlio.username;
+    form.value.invito = figlio.invito;
     form.value.nome_cognome = `${form.value.nome} ${form.value.cognome}`;
-    if (data.intolleranze != null) {
-      form.value.intolleranze = data.intolleranze;
+
+    if (figlio.intolleranze != null) {
+      form.value.intolleranze = figlio.intolleranze;
     }
-    if (form.value.intolleranze == true && data.intolleranze_list != null) {
-      form.value.intolleranze_list = data.intolleranze_list;
-      data.intolleranze_list.forEach(intolleranza => {
+
+    if (form.value.intolleranze == true && figlio.intolleranze_list != null) {
+      form.value.intolleranze_list = figlio.intolleranze_list;
+      figlio.intolleranze_list.forEach(intolleranza => {
         if (!intolleranzeDisponibili.includes(intolleranza)) {
           form.value.altroAttivo = true;
           form.value.altraIntolleranza += intolleranza;
@@ -56,28 +59,31 @@ onBeforeMount(() => {
     } else {
       form.value.intolleranze_list = [];
     }
-    if (data.email != null) {
-      form.value.email = data.email;
+    if (figlio.email != null) {
+      form.value.email = figlio.email;
     }
-    if (data.telefono != null) {
-      form.value.telefono = data.telefono;
+    if (figlio.telefono != null) {
+      form.value.telefono = figlio.telefono;
     }
-    // if (data.forestiero != null) {
-    //   form.value.forestiero = data.forestiero;
-    // }
   }
+  console.log('tutto ok 2');
+  onBeforeMountComplete.value = true;
 });
 
 onMounted(() => {
-  if (caricaPagina) {
-    try {
-      var primoDiv = document.getElementById('nascondi-pagina-register');
-      primoDiv.style.display = 'block';
-      setTimeout(() => VueScrollTo.scrollTo(primoDiv, 1000), 1);
-    } catch (e) {
-      console.log("element not found: nascondi-pagina-register");
+  watchEffect(() => {
+    console.log('on mmount', caricaPagina)
+    if (onBeforeMountComplete.value && caricaPagina) {
+      try {
+        console.log('ok')
+        var primoDiv = document.getElementById('nascondi-pagina-register-figlio');
+        primoDiv.style.display = 'block';
+        setTimeout(() => VueScrollTo.scrollTo(primoDiv, 1000), 1);
+      } catch (e) {
+        console.log("element not found: nascondi-pagina-register-figlio");
+      }
     }
-  }
+  });
 });
 
 const form = ref({
@@ -90,7 +96,6 @@ const form = ref({
   email: '',
   telefono: '',
   invito: '',
-  //forestiero: false,
   altroAttivo: false,
   altraIntolleranza: '',
   conferma: 'no'
@@ -117,7 +122,6 @@ async function submit(conferma) {
       document.getElementById('global-loader-http').style.display = 'block';
       form.value.conferma = conferma ? 'si' : 'no';
       await confermaPresenza(form.value);
-      localStorage.setItem('signInData', JSON.stringify(form.value));
       router.back();
     } catch (e) {
       console.log("Register ERR: ", e);
@@ -183,7 +187,7 @@ function chipClass(intolleranza) {
 </script>
 
 <template>
-  <div id="nascondi-pagina-register" style="display: none;">
+  <div id="nascondi-pagina-register-figlio" style="display: none;">
     <div class="auth-wrapper d-flex align-center justify-center pa-4">
       <VCard class="auth-card pa-4 pt-7" max-width="448">
         <VCardItem class="justify-center">
@@ -203,7 +207,7 @@ function chipClass(intolleranza) {
             Wedding starts here! 🐼 💒 🐻
           </h5>
           <p class="mb-0">
-            Ci sarai?
+            Ci sarà?
           </p>
         </VCardText>
 
@@ -226,13 +230,12 @@ function chipClass(intolleranza) {
               <VCol cols="12">
                 <div class="d-flex align-center mt-1 mb-4">
                   <VLabel for="intolleranze" style="opacity: 1;">
-                    <span class="me-1" style="text-wrap: wrap;">Sei intollerante/allergico a qualcosa? </span>
+                    <span class="me-1" style="text-wrap: wrap;">E' intollerante/allergico a qualcosa? </span>
                   </VLabel>
                   <VCheckbox id="intolleranze" v-model="form.intolleranze" inline />
                 </div>
                 <div v-if="form.intolleranze" class="text-center">
-                  <h4>Si intendono le intolleranze/allergie alimentari: sappiamo tutti che solo la sposa
-                    sopporta frasanz</h4>
+                  <h4>Si intendono le intolleranze/allergie alimentari</h4>
                   <VChip v-for="intolleranza in intolleranzeDisponibili" :key="intolleranza"
                     :class="chipClass(intolleranza)" variant="outlined" class="mr-2 mb-2 "
                     @click="toggleIntolleranza(intolleranza)">
@@ -245,17 +248,15 @@ function chipClass(intolleranza) {
                 </div>
               </VCol>
 
-
               <VCardText class="pt-2">
                 <h5 class="text-h5 font-weight-semibold mb-1" style="text-wrap: wrap;">
-                  Vuoi rimanere aggiornato sul nostro matrimonio? 💌
+                  Vuoi far si che rimanga aggiornato sul nostro matrimonio? 💌
                 </h5>
               </VCardText>
 
               <!-- telefono -->
               <VCol cols="12">
-                <VTextField v-model="form.telefono" placeholder="Telefono" id="tel" type="tel"
-                  hint="si, probabilmente, anzi quasi sicuramente, abbiamo già questi dati, ma se ci conosci sai che siamo molto pigri e non ci andava di ricopiarli!" />
+                <VTextField v-model="form.telefono" placeholder="Telefono" id="tel" type="tel" />
               </VCol>
 
               <!-- TODO al click la tastiera non deve coprire il campo di input ma spostare il focus su di esso (deve essere visibile cosa si sta scrivendo) -->
@@ -267,12 +268,12 @@ function chipClass(intolleranza) {
 
               <VCol cols="12">
                 <VBtn block type="submit" @click="submit(true)">
-                  Conferma la tua presenza! 😍
+                  Conferma! 😍
                 </VBtn>
               </VCol>
               <VCol cols="12" style="text-align: center;">
                 <a href="#" @click.prevent="submit(false)" style="text-decoration: none; color: #9d1212;">
-                  <span style="text-decoration: underline; font-size: 0.85rem">Purtroppo non potrò
+                  <span style="text-decoration: underline; font-size: 0.85rem">Purtroppo non potrà
                     partecipare</span> 🥲
                 </a>
               </VCol>

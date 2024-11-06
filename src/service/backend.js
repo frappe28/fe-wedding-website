@@ -22,7 +22,7 @@ export const signIn = async (user, responseOmonimi) => {
     } else if (nome === "admin" && cognome === "password") {
         return { "state": false, "message": "Non Invitato" };
     } else {
-        if (responseOmonimi != null && responseOmonimi.filter(r => r.nome == nome && r.cognome == cognome) != null && params.anno) {
+        if (responseOmonimi != null && responseOmonimi.filter(r => r.nome == nome && r.cognome == cognome)?.length > 0 && params.anno) {
             const invitato = responseOmonimi.filter(r => r.id === r.nome + r.cognome + params.anno.slice(-2))
             if (invitato != null && invitato.length === 1) {
                 return {
@@ -77,6 +77,19 @@ export const confermaPresenza = async (user) => {
         )
         return response.data;
     } catch (error) {
-        throw new Error(`Login fallito: ${error.message}`)
+        throw new Error(`Conferma Fallita: ${error.message}`)
+    }
+}
+
+export const getInvitato = async (id) => {
+    try {
+        const response = await API.get('/get-invitato',
+            {
+                params: { id }
+            }
+        );
+        return response.data;
+    } catch (error) {
+        throw new Error(`Recupero Invitato Fallito: ${error.message}`)
     }
 }
