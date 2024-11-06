@@ -44,6 +44,12 @@ onMounted(() => {
     invito.value = data.invito;
     form.value.conferma = data.conferma;
     labelBtn.value = form.value.conferma === 'si' ? 'Aggiorna i miei dati 💌' : 'Conferma la tua presenza 💌';
+    if (data.invito === 'sala')
+      labelWelcome.value = 'E quindi, ci sarai al nostro matrimonio?';
+    else if (data.invito === 'dopofesta')
+      labelWelcome.value = 'Scateniamoci insieme! Il dopofesta ti attende!';
+    else
+      labelWelcome.value = 'Sii con noi nel momento del grande "si"!';
   }
 
 });
@@ -51,10 +57,11 @@ const form = ref({
   nome_cognome: '',
   nome: '',
   cognome: '',
-  conferma: '',
+  conferma: ''
 })
 const invito = ref();
 const labelBtn = ref();
+const labelWelcome = ref();
 
 async function registrati() {
   //console.log("Conferma la tua presenza");
@@ -78,7 +85,7 @@ async function registrati() {
           Ciao {{ form?.userSaluto }} <span class="text-high-emphasis">🎉</span>
         </h5>
         <div class="text-body-1">
-          <span class="v-text-wrap-justify">E quindi, ci sarai al nostro matrimonio? </span>
+          <span class="v-text-wrap-justify">{{ labelWelcome }} </span>
         </div>
       </div>
       <VBtn size="small" @click="registrati" v-if="invito === 'sala' || invito === 'dopofesta'">

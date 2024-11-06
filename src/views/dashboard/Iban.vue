@@ -26,15 +26,14 @@ const copyIbanToClipboard = () => {
     <VCardText>
       <div class="mb-2">
         <h5 class="text-h5">
-          <span class="v-text-wrap-justify">Per noi è molto importante che tu ci sia!</span>
+          <span class="v-text-wrap-justify">Per noi è molto importante che tu ci sia! </span>
           <span class="text-high-emphasis">💚</span>
         </h5>
         <div class="text-body-1">
           <p class="v-text-wrap-justify">
             Il pensiero più bello che tu possa farci è essere con noi nel nostro grande giorno. <br>
-            Ma se gradisci farci un regalo, preferiremmo metterlo nel salvadanaio, e quando lo useremo in futuro,
-            penseremo con gioia a te e al
-            tuo gesto.
+            Ma se gradisci farci un regalo, puoi aiutarci a realizzare il nostro sogno di un’avventura in giro per
+            il mondo 🌈
           </p>
         </div>
       </div>
