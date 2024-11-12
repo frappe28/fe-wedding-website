@@ -125,55 +125,31 @@ const recentDevices = [
           <VCardText>
             <!-- 👉 Current Password -->
             <VRow class="mb-3">
-              <VCol
-                cols="12"
-                md="6"
-              >
+              <VCol cols="12" md="6">
                 <!-- 👉 current password -->
-                <VTextField
-                  v-model="currentPassword"
-                  :type="isCurrentPasswordVisible ? 'text' : 'password'"
-                  :append-inner-icon="isCurrentPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'"
-                  autocomplete="on"
-                  label="Current Password"
-                  placeholder="············"
-                  @click:append-inner="isCurrentPasswordVisible = !isCurrentPasswordVisible"
-                />
+                <VTextField v-model="currentPassword" :type="isCurrentPasswordVisible ? 'text' : 'password'"
+                  :append-inner-icon="isCurrentPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'" autocomplete="on"
+                  label="Current Password" placeholder="············"
+                  @click:append-inner="isCurrentPasswordVisible = !isCurrentPasswordVisible" />
               </VCol>
             </VRow>
 
             <!-- 👉 New Password -->
             <VRow>
-              <VCol
-                cols="12"
-                md="6"
-              >
+              <VCol cols="12" md="6">
                 <!-- 👉 new password -->
-                <VTextField
-                  v-model="newPassword"
-                  :type="isNewPasswordVisible ? 'text' : 'password'"
-                  :append-inner-icon="isNewPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'"
-                  label="New Password"
-                  autocomplete="on"
-                  placeholder="············"
-                  @click:append-inner="isNewPasswordVisible = !isNewPasswordVisible"
-                />
+                <VTextField v-model="newPassword" :type="isNewPasswordVisible ? 'text' : 'password'"
+                  :append-inner-icon="isNewPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'" label="New Password"
+                  autocomplete="on" placeholder="············"
+                  @click:append-inner="isNewPasswordVisible = !isNewPasswordVisible" />
               </VCol>
 
-              <VCol
-                cols="12"
-                md="6"
-              >
+              <VCol cols="12" md="6">
                 <!-- 👉 confirm password -->
-                <VTextField
-                  v-model="confirmPassword"
-                  :type="isConfirmPasswordVisible ? 'text' : 'password'"
-                  :append-inner-icon="isConfirmPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'"
-                  autocomplete="on"
-                  label="Confirm New Password"
-                  placeholder="············"
-                  @click:append-inner="isConfirmPasswordVisible = !isConfirmPasswordVisible"
-                />
+                <VTextField v-model="confirmPassword" :type="isConfirmPasswordVisible ? 'text' : 'password'"
+                  :append-inner-icon="isConfirmPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'" autocomplete="on"
+                  label="Confirm New Password" placeholder="············"
+                  @click:append-inner="isConfirmPasswordVisible = !isConfirmPasswordVisible" />
               </VCol>
             </VRow>
           </VCardText>
@@ -185,17 +161,9 @@ const recentDevices = [
             </p>
 
             <ul class="d-flex flex-column gap-y-3">
-              <li
-                v-for="item in passwordRequirements"
-                :key="item"
-                class="d-flex"
-              >
+              <li v-for="item in passwordRequirements" :key="item" class="d-flex">
                 <div>
-                  <VIcon
-                    size="7"
-                    icon="ri-checkbox-blank-circle-fill"
-                    class="me-3"
-                  />
+                  <VIcon size="7" icon="ri-checkbox-blank-circle-fill" class="me-3" />
                 </div>
                 <span class="font-weight-medium">{{ item }}</span>
               </li>
@@ -206,11 +174,7 @@ const recentDevices = [
           <VCardText class="d-flex flex-wrap gap-4">
             <VBtn>Save changes</VBtn>
 
-            <VBtn
-              type="reset"
-              color="secondary"
-              variant="outlined"
-            >
+            <VBtn type="reset" color="secondary" variant="outlined">
               Reset
             </VBtn>
           </VCardText>
@@ -227,11 +191,9 @@ const recentDevices = [
             Two factor authentication is not enabled yet.
           </p>
           <p>
-            Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.
-            <a
-              href="javascript:void(0)"
-              class="text-decoration-none"
-            >Learn more.</a>
+            Two-factor authentication adds an additional layer of security to your account by requiring more than just a
+            password to log in.
+            <a href="javascript:void(0)" class="text-decoration-none">Learn more.</a>
           </p>
 
           <VBtn>
@@ -247,38 +209,24 @@ const recentDevices = [
       <VCard title="Create an API key">
         <VRow>
           <!-- 👉 Choose API Key -->
-          <VCol
-            cols="12"
-            md="5"
-            order-md="0"
-            order="1"
-          >
+          <VCol cols="12" md="5" order-md="0" order="1">
             <VCardText>
               <VForm @submit.prevent="() => {}">
                 <VRow>
                   <!-- 👉 Choose API Key -->
                   <VCol cols="12">
-                    <VSelect
-                      label="Choose the API key type you want to create"
-                      placeholder="Select API key type"
-                      :items="['Full Control', 'Modify', 'Read & Execute', 'List Folder Contents', 'Read Only', 'Read & Write']"
-                    />
+                    <VSelect label="Choose the API key type you want to create" placeholder="Select API key type"
+                      :items="['Full Control', 'Modify', 'Read & Execute', 'List Folder Contents', 'Read Only', 'Read & Write']" />
                   </VCol>
 
                   <!-- 👉 Name the API Key -->
                   <VCol cols="12">
-                    <VTextField
-                      label="Name the API key"
-                      placeholder="Name the API key"
-                    />
+                    <VTextField label="Name the API key" placeholder="Name the API key" />
                   </VCol>
 
                   <!-- 👉 Create Key Button -->
                   <VCol cols="12">
-                    <VBtn
-                      type="submit"
-                      block
-                    >
+                    <VBtn type="submit" block>
                       Create Key
                     </VBtn>
                   </VCol>
@@ -288,41 +236,32 @@ const recentDevices = [
           </VCol>
         </VRow>
       </VCard>
-    <!-- !SECTION -->
+      <!-- !SECTION -->
     </VCol>
 
     <VCol cols="12">
       <!-- SECTION: API Keys List -->
       <VCard title="API Key List &amp; Access">
         <VCardText>
-          An API key is a simple encrypted string that identifies an application without any principal. They are useful for accessing public data anonymously, and are used to associate API requests with your project for quota and billing.
+          An API key is a simple encrypted string that identifies an application without any principal. They are useful
+          for accessing public data anonymously, and are used to associate API requests with your project for quota and
+          billing.
         </VCardText>
 
         <!-- 👉 Server Status -->
         <VCardText class="d-flex flex-column gap-y-4">
-          <div
-            v-for="serverKey in serverKeys"
-            :key="serverKey.key"
-            class="bg-var-theme-background pa-4"
-          >
+          <div v-for="serverKey in serverKeys" :key="serverKey.key" class="bg-var-theme-background pa-4">
             <div class="d-flex align-center flex-wrap mb-3">
               <h6 class="text-h6 mb-0 me-3">
                 {{ serverKey.name }}
               </h6>
-              <VChip
-                color="primary"
-                size="small"
-              >
+              <VChip color="primary" size="small">
                 {{ serverKey.permission }}
               </VChip>
             </div>
             <p class="text-base font-weight-medium">
               <span class="me-3">{{ serverKey.key }}</span>
-              <VIcon
-                :size="18"
-                icon="ri-file-copy-line"
-                class="cursor-pointer"
-              />
+              <VIcon :size="18" icon="ri-file-copy-line" class="cursor-pointer" />
             </p>
             <span>Created on {{ serverKey.createdOn }}</span>
           </div>
@@ -335,25 +274,15 @@ const recentDevices = [
     <VCol cols="12">
       <!-- 👉 Table -->
       <VCard title="Recent Devices">
-        <VDataTable
-          :headers="recentDevicesHeaders"
-          :items="recentDevices"
-          hide-default-footer
-          class="text-no-wrap"
-        >
+        <VDataTable :headers="recentDevicesHeaders" :items="recentDevices" hide-default-footer class="text-no-wrap">
           <template #item.browser="{ item }">
             <div class="d-flex">
-              <VIcon
-                start
-                :icon="item.deviceIcon.icon"
-                :color="item.deviceIcon.color"
-              />
+              <VIcon start :icon="item.deviceIcon.icon" :color="item.deviceIcon.color" />
               <span>
                 {{ item.browser }}
               </span>
             </div>
           </template>
-          <!-- TODO Refactor this after vuetify provides proper solution for removing default footer -->
           <template #bottom />
         </VDataTable>
       </VCard>

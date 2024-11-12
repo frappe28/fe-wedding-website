@@ -64,7 +64,7 @@ onMounted(() => {
     else if (data.invito === 'dopofesta')
       labelWelcome.value = 'Scateniamoci insieme! Il dopofesta ti attende!';
     else
-      labelWelcome.value = 'Sii con noi nel momento del grande "si"!'; // TODO far capire che può partecipare solo in chiesa
+      labelWelcome.value = 'Ci farebbe molto piacere se fossi presente alla celebrazione del nostro matrimonio in chiesa e al momento del grande "SI"!';
   }
 
 });
