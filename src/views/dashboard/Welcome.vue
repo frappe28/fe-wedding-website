@@ -116,7 +116,6 @@ const getRandomIcon = () => {
       <!-- Generazione dinamica dei bottoni per ogni figlio -->
       <VBtn v-if="form?.figliId != null && form?.figliId.length > 0" v-for="(figlio, index) in form?.figliId"
         :key="figlio" class="mr-2 mt-2" size="small" @click="registraFiglio(figlio.id)">
-        <!-- TODO metti un'icona diversa per i figli -->
         Registra {{ figlio.nome }} {{ getRandomIcon() }}
       </VBtn>
     </VCardText>
