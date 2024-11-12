@@ -3,7 +3,19 @@ import { onBeforeMount } from 'vue';
 import { router } from '../../plugins/router';
 
 
-onBeforeMount(() => { });
+onBeforeMount(() => {
+  const route = useRoute();
+  const query = { ...route.query };
+
+  if (query.showError) {
+    showError.value = true;
+
+    // Rimuove il parametro 'showError' dal percorso una volta mostrato
+    delete query.showError;
+    router.replace({ query }); // Aggiorna il percorso senza ricaricare la pagina
+  }
+});
+
 onMounted(() => {
   var caricaPagina = true;
   const route = useRoute();
@@ -66,6 +78,7 @@ const form = ref({
 const invito = ref();
 const labelBtn = ref();
 const labelWelcome = ref();
+const showError = ref(false);
 
 async function registrati() {
   //console.log("Conferma la tua presenza");
@@ -75,6 +88,12 @@ async function registrati() {
       router.push({ name: 'register', query: {} })
     } catch (e) {
       console.log("ERR: ", e);
+      showError.value = true;
+
+      // Nascondi il pop-up dopo 3 secondi
+      setTimeout(() => {
+        showError.value = false;
+      }, 3000);
     }
   }
 }
@@ -86,6 +105,12 @@ async function registraFiglio(figlioId) {
       router.push({ name: 'registraFiglio', query: { figlioId } })
     } catch (e) {
       console.log("ERR: ", e);
+      showError.value = true;
+
+      // Nascondi il pop-up dopo 3 secondi
+      setTimeout(() => {
+        showError.value = false;
+      }, 3000);
     }
   }
 }
@@ -118,6 +143,10 @@ const getRandomIcon = () => {
         :key="figlio" class="mr-2 mt-2" size="small" @click="registraFiglio(figlio.id)">
         Registra {{ figlio.nome }} {{ getRandomIcon() }}
       </VBtn>
+
+      <VSnackbar v-if="showError" v-model="showError" timeout="3000">
+        Ops qualcosa è andato storto! 🥲 Contatta gli sposi per capire cosa c'è che non va!
+      </VSnackbar>
     </VCardText>
   </VCard>
 </template>

@@ -117,7 +117,6 @@ async function submit(conferma) {
       document.getElementById('global-loader-http').style.display = 'block';
       form.value.conferma = conferma ? 'si' : 'no';
       await confermaPresenza(form.value);
-      //TODO DEVE SALVARE ANCHE I FIGLI
       localStorage.setItem('signInData', JSON.stringify(form.value));
       router.back();
     } catch (e) {

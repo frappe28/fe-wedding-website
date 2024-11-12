@@ -22,17 +22,16 @@ onBeforeMount(async () => {
   try {
     if (route.query.figlioId) {
       figlio = (await getInvitato(route.query.figlioId)).data;
-      console.log(figlio);
     }
-  } catch (e) { }
+  } catch (e) {
+    router.replace({ path: '/dashboard', query: { showError: 'true' } });
+  }
   if (figlio == null || figlio.nome == null || figlio.nome == "" || figlio.cognome == null || figlio.cognome == "") {
-    router.replace({ path: '/dashboard' });
-    // TODO inserire un toast message se si spacca qualcosa
+    router.replace({ path: '/dashboard', query: { showError: 'true' } });
   } else {
     caricaPagina = true;
   }
-  console.log('tutto ok');
-  console.log(caricaPagina);
+
   if (caricaPagina) {
     form.value.nome = figlio.nome;
     form.value.cognome = figlio.cognome;
@@ -66,16 +65,13 @@ onBeforeMount(async () => {
       form.value.telefono = figlio.telefono;
     }
   }
-  console.log('tutto ok 2');
   onBeforeMountComplete.value = true;
 });
 
 onMounted(() => {
   watchEffect(() => {
-    console.log('on mmount', caricaPagina)
     if (onBeforeMountComplete.value && caricaPagina) {
       try {
-        console.log('ok')
         var primoDiv = document.getElementById('nascondi-pagina-register-figlio');
         primoDiv.style.display = 'block';
         setTimeout(() => VueScrollTo.scrollTo(primoDiv, 1000), 1);
