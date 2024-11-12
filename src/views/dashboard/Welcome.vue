@@ -89,6 +89,12 @@ async function registraFiglio(figlioId) {
     }
   }
 }
+
+const iconArray = ['🧸', '🦄', '🌼', '🍄', '🏐', '🚀', '🤖', '🧢', '🚗', '🎨', '🌟'];
+
+const getRandomIcon = () => {
+  return iconArray[Math.floor(Math.random() * iconArray.length)];
+};
 </script>
 
 
@@ -111,7 +117,7 @@ async function registraFiglio(figlioId) {
       <VBtn v-if="form?.figliId != null && form?.figliId.length > 0" v-for="(figlio, index) in form?.figliId"
         :key="figlio" class="mr-2 mt-2" size="small" @click="registraFiglio(figlio.id)">
         <!-- TODO metti un'icona diversa per i figli -->
-        Registra {{ figlio.nome }} 🧸
+        Registra {{ figlio.nome }} {{ getRandomIcon() }}
       </VBtn>
     </VCardText>
   </VCard>
