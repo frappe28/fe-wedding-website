@@ -24,8 +24,7 @@ onBeforeMount(async () => {
 
   let figlio = null;
   try {
-    //TODO -> aggiungi opacità al bg del loader 
-    document.getElementById('global-loader-http').style.display = 'block';
+    document.getElementById('loading-bg-http').style.display = 'flex';
     if (route.query.figlioId) {
       figlio = (await getInvitato(route.query.figlioId)).data;
     }
@@ -33,7 +32,7 @@ onBeforeMount(async () => {
     console.log("Register Figlio ERR: ", e);
     router.replace({ path: '/dashboard', query: { showError: 'true' } });
   } finally {
-    document.getElementById('global-loader-http').style.display = 'none';
+    document.getElementById('loading-bg-http').style.display = 'none';
   }
 
   if (figlio == null || figlio.nome == null || figlio.nome == "" || figlio.cognome == null || figlio.cognome == "") {
@@ -124,15 +123,14 @@ async function submit(conferma) {
       form.value.intolleranze_list.push(form.value.altraIntolleranza);
     }
     try {
-      //TODO -> aggiungi opacità al bg del loader 
-      document.getElementById('global-loader-http').style.display = 'block';
+      document.getElementById('loading-bg-http').style.display = 'flex';
       form.value.conferma = conferma ? 'si' : 'no';
       await confermaPresenza(form.value);
       router.back();
     } catch (e) {
       console.log("Register ERR: ", e);
     } finally {
-      document.getElementById('global-loader-http').style.display = 'none';
+      document.getElementById('loading-bg-http').style.display = 'none';
     }
   }
 }

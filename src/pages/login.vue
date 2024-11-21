@@ -74,7 +74,7 @@ async function login() {
       loginError.value = false;
       warningOmonimi.value = false;
       // Mostra il loader globale
-      document.getElementById('global-loader-http').style.display = 'block';
+      document.getElementById('loading-bg-http').style.display = 'flex';
       const params = { nome: form.value.nome, cognome: form.value.cognome }
       if (form.value.anno) {
         params['anno'] = form.value.anno;
@@ -104,7 +104,7 @@ async function login() {
       console.log("ERR: ", e);
     } finally {
       // Nascondi il loader globale
-      document.getElementById('global-loader-http').style.display = 'none';
+      document.getElementById('loading-bg-http').style.display = 'none';
     }
   }
 }

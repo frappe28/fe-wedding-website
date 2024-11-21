@@ -1,5 +1,4 @@
 export const routes = [
-  //TODO refresh della pagina non deve dare ACCESS DENIED ma conservare la sessione.
   /*TODO (non replicabile) capire perché a volte la rotta si incanta: 
    - da login ha finito di girare la rotella con stato ok, 
      l'url diventa dashboard ma a livello grafico sei ancora sul form di login 

@@ -117,8 +117,7 @@ async function submit(conferma) {
       form.value.intolleranze_list.push(form.value.altraIntolleranza);
     }
     try {
-      //TODO -> aggiungi opacità al bg del loader 
-      document.getElementById('global-loader-http').style.display = 'block';
+      document.getElementById('loading-bg-http').style.display = 'flex';
       form.value.conferma = conferma ? 'si' : 'no';
       await confermaPresenza(form.value);
 
@@ -140,7 +139,7 @@ async function submit(conferma) {
     } catch (e) {
       console.log("Register ERR: ", e);
     } finally {
-      document.getElementById('global-loader-http').style.display = 'none';
+      document.getElementById('loading-bg-http').style.display = 'none';
     }
   }
 }
