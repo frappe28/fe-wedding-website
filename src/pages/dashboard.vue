@@ -4,7 +4,6 @@ import Carosello from '@/views/dashboard/Carosello.vue'
 import Contatti from '@/views/dashboard/Contatti.vue'
 import Countdown from '@/views/dashboard/Countdown.vue'
 import Iban from '@/views/dashboard/Iban.vue'
-import LibrettoMessa from '@/views/dashboard/LibrettoMessa.vue'
 import MappaChiesa from '@/views/dashboard/MappaChiesa.vue'
 import Welcome from '@/views/dashboard/Welcome.vue'
 import logo from '@images/pages/logo3.png'
@@ -13,6 +12,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { router } from '../plugins/router'
 
 //le magie di checco
+import LibrettoMessa from '@/views/dashboard/LibrettoMessa.vue'
 import MappaLocationDopoFesta from '@/views/dashboard/MappaLocationDopoFesta.vue'
 import MappaLocationSala from '@/views/dashboard/MappaLocationSala.vue'
 import '../assets/styles/frasanz-dash.scss'
@@ -100,7 +100,7 @@ onUnmounted(() => {
             <Welcome />
           </VCol>
           <VCol cols="12">
-            <Countdown />
+            <LibrettoMessa v-if="isCountdownFinished" />
           </VCol>
         </VRow>
       </VCol>
@@ -108,28 +108,36 @@ onUnmounted(() => {
       <VCol cols="12" md="4">
         <VRow>
           <VCol cols="12">
+            <Countdown />
+          </VCol>
+
+        </VRow>
+      </VCol>
+
+      <VCol cols="12">
+        <VRow>
+          <VCol cols="12" md="6">
             <Calendar />
           </VCol>
-          <VCol cols="12" v-if="isCountdownFinished">
-            <LibrettoMessa />
+          <VCol cols="12" md="6">
+            <Carosello />
           </VCol>
         </VRow>
       </VCol>
 
-      <VCol cols="12" md="12">
-        <Carosello />
-      </VCol>
+      <VCol cols="12">
+        <VRow>
+          <VCol cols="12" md="6">
+            <MappaChiesa />
+          </VCol>
+          <VCol cols="12" md="6" v-if="invito === 'dopofesta'">
+            <MappaLocationDopoFesta />
+          </VCol>
 
-      <VCol cols="12" md="6">
-        <MappaChiesa />
-      </VCol>
-
-      <VCol cols="12" md="6" v-if="invito === 'dopofesta'">
-        <MappaLocationDopoFesta />
-      </VCol>
-
-      <VCol cols="12" md="6" v-if="invito === 'sala'">
-        <MappaLocationSala />
+          <VCol cols="12" md="6" v-if="invito === 'sala'">
+            <MappaLocationSala />
+          </VCol>
+        </VRow>
       </VCol>
 
       <VCol cols="12">
