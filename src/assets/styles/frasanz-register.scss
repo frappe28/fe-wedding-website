@@ -1,0 +1,11 @@
+
+@media /*screen and */ (min-width: 765px) and (min-height: 504px) {
+  .auth-footer-start-tree.d-none.d-md-block,  
+  .auth-footer-end-tree.d-none.d-md-block {
+        display: block !important;
+    }
+
+  .auth-footer-end-tree {
+      margin-bottom: 30px;
+  }
+}

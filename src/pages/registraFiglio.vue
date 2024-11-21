@@ -9,6 +9,10 @@ import { useTheme } from 'vuetify'
 import { router } from '../plugins/router'
 import { confermaPresenza, getInvitato } from '../service/backend'
 
+
+//le magie di checco
+import '../assets/styles/frasanz-register.scss'
+
 var caricaPagina = false;
 let onBeforeMountComplete = ref(false);
 
@@ -20,12 +24,18 @@ onBeforeMount(async () => {
 
   let figlio = null;
   try {
+    //TODO -> aggiungi opacità al bg del loader 
+    document.getElementById('global-loader-http').style.display = 'block';
     if (route.query.figlioId) {
       figlio = (await getInvitato(route.query.figlioId)).data;
     }
   } catch (e) {
+    console.log("Register Figlio ERR: ", e);
     router.replace({ path: '/dashboard', query: { showError: 'true' } });
+  } finally {
+    document.getElementById('global-loader-http').style.display = 'none';
   }
+
   if (figlio == null || figlio.nome == null || figlio.nome == "" || figlio.cognome == null || figlio.cognome == "") {
     router.replace({ path: '/dashboard', query: { showError: 'true' } });
   } else {
@@ -279,12 +289,12 @@ function chipClass(intolleranza) {
         </VCardText>
       </VCard>
 
-      <VImg class="auth-footer-start-tree d-none d-md-block" :src="sposini" :width="200" />
+      <VImg class="auth-footer-start-tree d-none d-md-block" :src="sposini" :width="200" eager />
 
-      <VImg :src="wrings" class="auth-footer-end-tree d-none d-md-block" :width="150" />
+      <VImg :src="wrings" class="auth-footer-end-tree d-none d-md-block" :width="150" eager />
 
       <!-- bg img -->
-      <VImg class="auth-footer-mask d-none d-md-block" :src="authThemeMask" />
+      <VImg class="auth-footer-mask d-none d-md-block" :src="authThemeMask" eager />
     </div>
   </div>
 </template>

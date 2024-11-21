@@ -18,6 +18,11 @@ onMounted(() => {
         <img src="${link}" alt="Icona" style="width:10px; height:10px; vertical-align:middle; margin-left:4px;">
       </div>
     `);
+
+  // Forza il rendering
+  setTimeout(() => {
+    chiesaMap.value.invalidateSize();
+  }, 500);
 });
 </script>
 

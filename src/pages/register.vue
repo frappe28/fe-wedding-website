@@ -9,6 +9,10 @@ import { useTheme } from 'vuetify'
 import { router } from '../plugins/router'
 import { confermaPresenza } from '../service/backend'
 
+
+//le magie di checco
+import '../assets/styles/frasanz-register.scss'
+
 var caricaPagina = false;
 onBeforeMount(() => {
   const route = useRoute();
@@ -282,12 +286,12 @@ function chipClass(intolleranza) {
         </VCardText>
       </VCard>
 
-      <VImg class="auth-footer-start-tree d-none d-md-block" :src="sposini" :width="200" />
+      <VImg :src="sposini" class="auth-footer-start-tree d-none d-md-block" :width="200" eager />
 
-      <VImg :src="wrings" class="auth-footer-end-tree d-none d-md-block" :width="150" />
+      <VImg :src="wrings" class="auth-footer-end-tree d-none d-md-block" :width="150" eager />
 
       <!-- bg img -->
-      <VImg class="auth-footer-mask d-none d-md-block" :src="authThemeMask" />
+      <VImg class="auth-footer-mask d-none d-md-block" :src="authThemeMask" eager />
     </div>
   </div>
 </template>
