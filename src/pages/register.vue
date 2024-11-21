@@ -121,7 +121,21 @@ async function submit(conferma) {
       document.getElementById('global-loader-http').style.display = 'block';
       form.value.conferma = conferma ? 'si' : 'no';
       await confermaPresenza(form.value);
-      localStorage.setItem('signInData', JSON.stringify(form.value));
+
+      let dataLS = {};
+      try {
+        if (localStorage.getItem("signInData")) {
+          dataLS = JSON.parse(localStorage.getItem("signInData"));
+          dataLS.intolleranze = form.value.intolleranze;
+          dataLS.intolleranze_list = form.value.intolleranze_list;
+          dataLS.email = form.value.email;
+          dataLS.telefono = form.value.telefono;
+          dataLS.username = form.value.username;
+          dataLS.conferma = form.value.conferma;
+
+          localStorage.setItem('signInData', JSON.stringify(dataLS));
+        }
+      } catch (e) { }
       router.back();
     } catch (e) {
       console.log("Register ERR: ", e);
