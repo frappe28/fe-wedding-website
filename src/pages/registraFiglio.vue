@@ -226,7 +226,7 @@ function chipClass(intolleranza) {
               <!-- Username -->
               <!-- rinominato in nickname per prevenire AUTOCOMPLETAMENTO -->
               <VCol cols="12">
-                <VTextField v-model="form.username" placeholder="Nickname" id="nickname" type="text"
+                <VTextField v-model="form.username" placeholder="Nickname (opzionale)" id="nickname" type="text"
                   autocomplete="false" />
               </VCol>
 
@@ -250,24 +250,6 @@ function chipClass(intolleranza) {
                   <VTextField v-if="form?.altroAttivo" v-model="form.altraIntolleranza"
                     placeholder="Specificare altre intolleranze" type="text" />
                 </div>
-              </VCol>
-
-              <VCardText class="pt-2">
-                <h5 class="text-h5 font-weight-semibold mb-1" style="text-wrap: wrap;">
-                  Vuoi far si che rimanga aggiornato sul nostro matrimonio? 💌
-                </h5>
-              </VCardText>
-
-              <!-- telefono -->
-              <VCol cols="12">
-                <VTextField v-model="form.telefono" placeholder="Telefono" id="tel" type="tel" />
-              </VCol>
-
-              <!-- TODO al click la tastiera non deve coprire il campo di input ma spostare il focus su di esso (deve essere visibile cosa si sta scrivendo) -->
-              <!-- email -->
-              <VCol cols="12">
-                <VTextField v-model="form.email" placeholder="Email" type="email" id="email_reg" @blur="onblur"
-                  @focus="onfocus" :error-messages="erroreMail" />
               </VCol>
 
               <VCol cols="12">
@@ -309,7 +291,7 @@ function chipClass(intolleranza) {
 
 <style scoped>
 .chip-selected {
-  background-color: #56BC6C;
+  background-color: #00A455;
   /* Cambia il colore della chip quando selezionata */
   color: white;
 }

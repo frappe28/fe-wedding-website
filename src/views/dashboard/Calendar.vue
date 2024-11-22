@@ -4,7 +4,7 @@ import calendar_may from '@images/misc/calendar_may14.png';
 
 <template>
   <VCard class="position-relative">
-    <VImg :src="calendar_may" />
+    <VImg :src="calendar_may" class="fransci" />
   </VCard>
 </template>
 
@@ -14,5 +14,8 @@ import calendar_may from '@images/misc/calendar_may14.png';
   inline-size: 5.188rem;
   inset-block-end: 1.25rem;
   inset-inline-end: 1.25rem;
+}
+.fransci>.v-responsive__sizer {
+  padding-bottom: 100% !important;
 }
 </style>

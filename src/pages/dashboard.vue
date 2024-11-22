@@ -90,8 +90,20 @@ onUnmounted(() => {
 
     <VRow class="match-height">
       <VCol cols="12" md="4">
+        <VRow>
+
+        </VRow>
+      </VCol>
+
+      <VCol cols="12" md="4">
         <!-- logo -->
         <VImg :src="logo" class="logo" />
+      </VCol>
+
+      <VCol cols="12" md="4">
+        <VRow>
+
+        </VRow>
       </VCol>
 
       <VCol cols="12" md="4">
@@ -100,27 +112,21 @@ onUnmounted(() => {
             <Welcome />
           </VCol>
           <VCol cols="12">
+            <Countdown />
+          </VCol>
+          <VCol cols="12">
             <LibrettoMessa v-if="isCountdownFinished" />
           </VCol>
         </VRow>
       </VCol>
 
-      <VCol cols="12" md="4">
+      <VCol cols="12" md="8">
         <VRow>
-          <VCol cols="12">
-            <Countdown />
-          </VCol>
-
-        </VRow>
-      </VCol>
-
-      <VCol cols="12">
-        <VRow>
-          <VCol cols="12" md="6">
-            <Calendar />
-          </VCol>
-          <VCol cols="12" md="6">
+          <VCol cols="12" md="5">
             <Carosello />
+          </VCol>
+          <VCol cols="12" md="7">
+            <Calendar />
           </VCol>
         </VRow>
       </VCol>

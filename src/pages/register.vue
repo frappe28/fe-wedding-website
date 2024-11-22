@@ -321,7 +321,7 @@ function chipClass(intolleranza) {
 
 <style scoped>
 .chip-selected {
-  background-color: #56BC6C;
+  background-color: #00A455;
   /* Cambia il colore della chip quando selezionata */
   color: white;
 }
