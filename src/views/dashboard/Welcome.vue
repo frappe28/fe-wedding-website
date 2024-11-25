@@ -85,7 +85,7 @@ async function registrati() {
   if ((form.value.nome !== null && form.value.cognome !== null)
     && (form.value.nome !== '' && form.value.cognome !== '')) {
     try {
-      router.push({ name: 'register', query: {} })
+      router.push({ path: '/register', query: {} })
     } catch (e) {
       console.log("ERR: ", e);
       showError.value = true;
@@ -102,7 +102,7 @@ async function registraFiglio(figlioId) {
   if ((form.value.nome !== null && form.value.cognome !== null)
     && (form.value.nome !== '' && form.value.cognome !== '')) {
     try {
-      router.push({ name: 'registraFiglio', query: { figlioId } })
+      router.push({ path: '/registraFiglio', query: { figlioId } })
     } catch (e) {
       console.log("ERR: ", e);
       showError.value = true;
