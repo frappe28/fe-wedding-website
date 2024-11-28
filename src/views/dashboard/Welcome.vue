@@ -1,6 +1,6 @@
 <script setup>
 import { onBeforeMount } from 'vue';
-import { router } from '../../plugins/router';
+import { router , disabilitaEventiDevTools} from '../../plugins/router';
 
 
 onBeforeMount(() => {
@@ -17,31 +17,7 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
-/* //NON FUNZIONA ...
-  const disableEvent = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
-  };
-
-  // Blocca F12 e altre combinazioni per DevTools
-  const blockDevTools = (e) => {
-    const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
-
-    if (
-      e.key === 'F12' || // Blocca F12
-      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || // Ctrl+Shift+I/J
-      (e.ctrlKey && e.key === 'U') || // Ctrl+U
-      (e.key === 'S' && (isMac ? e.metaKey : e.ctrlKey)) // Cmd/Ctrl+S
-    ) {
-      disableEvent(e);
-    }
-  };
-
-  // Aggiungi listener per bloccare eventi indesiderati
-  document.addEventListener('keydown', blockDevTools);
-*/
-
+  disabilitaEventiDevTools();
   var caricaPagina = true;
   const route = useRoute();
 
@@ -92,11 +68,6 @@ onMounted(() => {
       labelWelcome.value = 'Ci farebbe molto piacere se fossi presente alla celebrazione del nostro matrimonio in chiesa e al momento del grande "SI"!';
   }
 
-});
-
-// Cleanup del listener quando il componente viene smontato
-onUnmounted(() => {
-  document.removeEventListener('keydown', blockDevTools);
 });
 
 const form = ref({

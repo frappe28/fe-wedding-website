@@ -5,7 +5,7 @@ import logo from '@images/pages/logo3.png'
 import sposini from '@images/pages/sposini.png'
 import rings from '@images/pages/wedding-ring.png'
 import { useTheme } from 'vuetify'
-import { router } from '../plugins/router'
+import { router , disabilitaEventiDevTools } from '../plugins/router'
 import { signIn } from '../service/backend'
 //import store from '../store/index'
 
@@ -31,6 +31,8 @@ onBeforeMount(() => {
   localStorage.clear();
 });
 onMounted(() => {
+  disabilitaEventiDevTools();
+
   //console.log("onMounted");
   try {
     var primoDiv = document.getElementById('login-page');

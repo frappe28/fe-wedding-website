@@ -9,7 +9,7 @@ import Welcome from '@/views/dashboard/Welcome.vue'
 import logo from '@images/pages/logo3.png'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-import { router } from '../plugins/router'
+import { router , disabilitaEventiDevTools } from '../plugins/router'
 
 //le magie di checco
 import LibrettoMessa from '@/views/dashboard/LibrettoMessa.vue'
@@ -65,6 +65,7 @@ onBeforeMount(() => {
   }
 });
 onMounted(() => {
+  disabilitaEventiDevTools();
   calculateTimeRemaining();
   countdownInterval = setInterval(calculateTimeRemaining, 1000);
 

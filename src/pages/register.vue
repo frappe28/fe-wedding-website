@@ -6,7 +6,7 @@ import wrings from '@images/pages/wedding-ring.png'
 import rings from '@images/rings.svg?raw'
 import { useRoute } from 'vue-router'
 import { useTheme } from 'vuetify'
-import { router } from '../plugins/router'
+import { router , disabilitaEventiDevTools } from '../plugins/router'
 import { confermaPresenza } from '../service/backend'
 
 
@@ -73,6 +73,7 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
+  disabilitaEventiDevTools();
   if (caricaPagina) {
     try {
       var primoDiv = document.getElementById('nascondi-pagina-register');
