@@ -6,8 +6,8 @@ const API = axios.create({
 });
 
 export const signIn = async (user, responseOmonimi) => {
-    let nome = user.nome.replace(' ', '').toLowerCase();
-    let cognome = user.cognome.replace(' ', '').toLowerCase();
+    let nome = user.nome.replace(' ', '').replace("'", '').toLowerCase();
+    let cognome = user.cognome.replace(' ', '').replace("'", '').toLowerCase();
     let params = {
         nome,
         cognome
@@ -53,7 +53,7 @@ export const signIn = async (user, responseOmonimi) => {
 export const confermaPresenza = async (user) => {
     try {
         const input = {
-            id: user.nome.replace(' ', '') + user.cognome.replace(' ', ''),
+            id: user.nome.replace(' ', '').replace("'", '') + user.cognome.replace(' ', '').replace("'", ''),
             nome: user.nome,
             cognome: user.cognome,
             intolleranze: user.intolleranze,
