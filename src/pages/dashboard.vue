@@ -9,9 +9,10 @@ import Welcome from '@/views/dashboard/Welcome.vue'
 import logo from '@images/pages/logo3.png'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-import { router , disabilitaEventiDevTools } from '../plugins/router'
+import { disabilitaEventiDevTools, router } from '../plugins/router'
 
 //le magie di checco
+import { THE_DATE } from '@/costants'
 import LibrettoMessa from '@/views/dashboard/LibrettoMessa.vue'
 import MappaLocationDopoFesta from '@/views/dashboard/MappaLocationDopoFesta.vue'
 import MappaLocationSala from '@/views/dashboard/MappaLocationSala.vue'
@@ -19,7 +20,7 @@ import '../assets/styles/frasanz-dash.scss'
 
 //TODO GESTIRE FOCUS ALL'INIZIO DELLA PAGINA (SU IPHONE DI FRANCESCA NON VA)
 
-const targetDate = new Date('2025-05-14T00:00:00');
+const targetDate = new Date(THE_DATE);
 const isCountdownFinished = ref(false);
 const timeRemainingDays = ref('');
 const timeRemainingMinutes = ref('');

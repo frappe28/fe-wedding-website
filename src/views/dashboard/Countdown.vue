@@ -1,7 +1,8 @@
 <script setup>
+import { THE_DATE } from '@/costants';
 import { onMounted, onUnmounted, ref } from 'vue';
 
-const targetDate = new Date('2025-05-14T00:00:00');
+const targetDate = new Date(THE_DATE);
 const isCountdownFinished = ref(false);
 const timeRemainingDays = ref('');
 const timeRemainingMinutes = ref('');

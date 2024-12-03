@@ -1,7 +1,11 @@
 <script setup>
+import { THE_DATE } from '@/costants';
 import { onBeforeMount } from 'vue';
-import { router , disabilitaEventiDevTools} from '../../plugins/router';
+import { disabilitaEventiDevTools, router } from '../../plugins/router';
 
+const targetDate = new Date(THE_DATE);
+const now = new Date();
+const difference = targetDate - now;
 
 onBeforeMount(() => {
   const route = useRoute();
@@ -60,8 +64,11 @@ onMounted(() => {
 
     form.value.conferma = data.conferma;
     labelBtn.value = form.value.conferma === 'si' ? 'Aggiorna i miei dati 💌' : 'Conferma la tua presenza 💌';
+
+
+
     if (data.invito === 'sala')
-      labelWelcome.value = 'E quindi, ci sarai al nostro matrimonio?';
+      labelWelcome.value = difference > 0 ? 'E quindi, ci sarai al nostro matrimonio?' : 'Il gran giorno è finalmente arrivato!';
     else if (data.invito === 'dopofesta')
       labelWelcome.value = 'Scateniamoci insieme! Il dopofesta ti attende!';
     else
@@ -136,7 +143,8 @@ const getRandomIcon = () => {
           <span class="v-text-wrap-justify">{{ labelWelcome }} </span>
         </div>
       </div>
-      <VBtn class="mr-2 mt-2" size="small" @click="registrati" v-if="invito === 'sala' || invito === 'dopofesta'">
+      <VBtn class="mr-2 mt-2" size="small" @click="registrati"
+        v-if="(invito === 'sala' || invito === 'dopofesta') & difference > 0">
         {{ labelBtn }}
       </VBtn>
 
