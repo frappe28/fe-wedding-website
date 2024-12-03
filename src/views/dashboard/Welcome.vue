@@ -144,12 +144,12 @@ const getRandomIcon = () => {
         </div>
       </div>
       <VBtn class="mr-2 mt-2" size="small" @click="registrati"
-        v-if="(invito === 'sala' || invito === 'dopofesta') & difference > 0">
+        v-if="(invito === 'sala' || invito === 'dopofesta') && difference > 0">
         {{ labelBtn }}
       </VBtn>
 
       <!-- Generazione dinamica dei bottoni per ogni figlio -->
-      <VBtn v-if="form?.figliId != null && form?.figliId.length > 0" v-for="(figlio, index) in form?.figliId"
+      <VBtn v-if="form?.figliId != null && form?.figliId.length > 0 && difference > 0" v-for="(figlio, index) in form?.figliId"
         :key="figlio" class="mr-2 mt-2" size="small" @click="registraFiglio(figlio.id)">
         Registra {{ figlio.nome }} {{ getRandomIcon() }}
       </VBtn>
