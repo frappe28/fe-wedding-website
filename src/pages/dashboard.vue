@@ -90,7 +90,7 @@ onUnmounted(() => {
 <template>
   <div id="nascondi-pagina-dashboard" style="display: none;">
 
-    <VRow class="match-height">
+    <VRow class="match-height dashboard-padding">
       <VCol cols="12" md="4">
         <VRow>
 
@@ -159,3 +159,9 @@ onUnmounted(() => {
     </VRow>
   </div>
 </template>
+
+<style lang="css">
+.dashboard-padding {
+  padding: 0 20px 30px 20px
+}
+</style>

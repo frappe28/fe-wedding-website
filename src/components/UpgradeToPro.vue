@@ -15,7 +15,7 @@
 <style lang="scss" scoped>
 .buy-now-button,
 .button-inner {
-  display: block;
+  display: flex;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;

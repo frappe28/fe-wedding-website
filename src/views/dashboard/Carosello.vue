@@ -27,8 +27,8 @@ const items = [
 
 <template>
   <VCard>
-    <VCarousel hide-delimiters cycle show-arrows="hover">
-      <VCarouselItem v-for="(item, i) in items" :key="i" :src="item" cover> </VCarouselItem>
+    <VCarousel hide-delimiters cycle show-arrows="hover" height="100%">
+      <VCarouselItem v-for="(item, i) in items" :key="i" :src="item" cover />
     </VCarousel>
   </VCard>
 </template>

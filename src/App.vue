@@ -28,6 +28,7 @@ import UpgradeToPro from '@/components/UpgradeToPro.vue';
 body .v-alert .v-alert__content {
   font-size: 0.75rem !important;
 }
+
 /* Sfondo opacizzato sopra il DOM */
 #loading-overlay {
   position: fixed;
