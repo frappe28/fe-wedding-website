@@ -12,14 +12,15 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { disabilitaEventiDevTools, router } from '../plugins/router'
 
 //le magie di checco
-import { THE_DATE } from '@/costants'
+import { DATE_AFTER_XMAS, THE_DATE } from '@/costants'
 import LibrettoMessa from '@/views/dashboard/LibrettoMessa.vue'
 import MappaLocationDopoFesta from '@/views/dashboard/MappaLocationDopoFesta.vue'
 import MappaLocationSala from '@/views/dashboard/MappaLocationSala.vue'
+import SaveTheDate from '@/views/dashboard/SaveTheDate.vue'
 import '../assets/styles/frasanz-dash.scss'
 
 //TODO GESTIRE FOCUS ALL'INIZIO DELLA PAGINA (SU IPHONE DI FRANCESCA NON VA)
-
+//GIORNO DEL MATRIMONIO 
 const targetDate = new Date(THE_DATE);
 const isCountdownFinished = ref(false);
 const timeRemainingDays = ref('');
@@ -36,6 +37,20 @@ const calculateTimeRemaining = () => {
     return;
   }
 };
+
+//DOPO NATALE
+const afterXmas = new Date(DATE_AFTER_XMAS);
+const isXmasFinished = ref(false);
+const calculateAfterXmas = () => {
+  const now = new Date();
+  const difference = afterXmas - now;
+
+  if (difference <= 0) {
+    isXmasFinished.value = true;
+    return;
+  }
+};
+
 
 let countdownInterval;
 var caricaPagina = false;
@@ -68,6 +83,7 @@ onBeforeMount(() => {
 onMounted(() => {
   disabilitaEventiDevTools();
   calculateTimeRemaining();
+  calculateAfterXmas();
   countdownInterval = setInterval(calculateTimeRemaining, 1000);
 
   if (caricaPagina) {
@@ -92,23 +108,14 @@ onUnmounted(() => {
 
     <VRow class="match-height dashboard-padding">
       <VCol cols="12" md="4">
-        <VRow>
-
-        </VRow>
-      </VCol>
-
-      <VCol cols="12" md="4">
-        <!-- logo -->
         <VImg :src="logo" class="logo" />
       </VCol>
 
-      <VCol cols="12" md="4">
-        <VRow>
-
-        </VRow>
+      <VCol cols="12" md="3" v-if="isXmasFinished">
+        <SaveTheDate />
       </VCol>
 
-      <VCol cols="12" md="4">
+      <VCol cols="12" :md="isXmasFinished ? 5 : 8">
         <VRow>
           <VCol cols="12">
             <Welcome />
@@ -122,7 +129,7 @@ onUnmounted(() => {
         </VRow>
       </VCol>
 
-      <VCol cols="12" md="8">
+      <VCol cols="12">
         <VRow>
           <VCol cols="12" md="5">
             <Carosello />
@@ -162,6 +169,6 @@ onUnmounted(() => {
 
 <style lang="css">
 .dashboard-padding {
-  padding: 0 20px 30px 20px
+  padding: 30px 20px 30px 20px
 }
 </style>
