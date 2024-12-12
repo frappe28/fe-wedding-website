@@ -111,11 +111,11 @@ onUnmounted(() => {
         <VImg :src="logo" class="logo" />
       </VCol>
 
-      <VCol cols="12" md="3" v-if="isXmasFinished">
+      <VCol cols="12" md="3" v-if="!isXmasFinished">
         <SaveTheDate />
       </VCol>
 
-      <VCol cols="12" :md="isXmasFinished ? 5 : 8">
+      <VCol cols="12" :md="!isXmasFinished ? 5 : 8">
         <VRow>
           <VCol cols="12">
             <Welcome />
