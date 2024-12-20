@@ -27,8 +27,49 @@ const items = [
 
 <template>
   <VCard>
-    <VCarousel hide-delimiters cycle show-arrows="hover" height="100%">
-      <VCarouselItem v-for="(item, i) in items" :key="i" :src="item" cover />
+    <VCarousel hide-delimiters cycle show-arrows="hover" height="46.5rem">
+      <VCarouselItem v-for="(item, i) in items" :key="i" class="carousel-item">
+        <img :src="item" class="main-image" />
+        <div class="background-container">
+          <img :src="item" class="background-image" />
+        </div>
+      </VCarouselItem>
     </VCarousel>
   </VCard>
 </template>
+
+<style scoped>
+.carousel-item {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(20px);
+  opacity: 0.5;
+}
+
+.main-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
+</style>

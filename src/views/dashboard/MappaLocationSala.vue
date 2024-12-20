@@ -80,7 +80,7 @@ onMounted(() => {
     </template>
 
     <VCardItem>
-      <div id="maplocation" style="height:40vh;"></div>
+      <div id="maplocation" style="height:50vh;"></div>
     </VCardItem>
   </VCard>
 </template>

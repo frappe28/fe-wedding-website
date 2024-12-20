@@ -106,7 +106,7 @@ onUnmounted(() => {
 <template>
   <div id="nascondi-pagina-dashboard" style="display: none;">
 
-    <VRow class="match-height dashboard-padding">
+    <VRow class="dashboard-padding">
       <VCol cols="12" md="4">
         <VImg :src="logo" class="logo" />
       </VCol>
@@ -121,36 +121,24 @@ onUnmounted(() => {
             <Welcome />
           </VCol>
           <VCol cols="12">
-            <Countdown />
-          </VCol>
-          <VCol cols="12">
-            <LibrettoMessa v-if="isCountdownFinished" />
+            <VCard>
+              <LibrettoMessa v-if="isCountdownFinished" />
+              <Countdown v-else />
+            </VCard>
           </VCol>
         </VRow>
       </VCol>
 
       <VCol cols="12">
         <VRow>
-          <VCol cols="12" md="5">
+          <VCol cols="12" md="4">
+            <Calendar />
             <Carosello />
           </VCol>
-          <VCol cols="12" md="7">
-            <Calendar />
-          </VCol>
-        </VRow>
-      </VCol>
-
-      <VCol cols="12">
-        <VRow>
-          <VCol cols="12" md="6">
+          <VCol cols="12" md="8">
             <MappaChiesa />
-          </VCol>
-          <VCol cols="12" md="6" v-if="invito === 'dopofesta'">
-            <MappaLocationDopoFesta />
-          </VCol>
-
-          <VCol cols="12" md="6" v-if="invito === 'sala'">
-            <MappaLocationSala />
+            <MappaLocationDopoFesta v-if="invito === 'dopofesta'" />
+            <MappaLocationSala v-if="invito === 'sala'" />
           </VCol>
         </VRow>
       </VCol>
@@ -162,7 +150,6 @@ onUnmounted(() => {
       <VCol cols="12">
         <Contatti />
       </VCol>
-
     </VRow>
   </div>
 </template>
