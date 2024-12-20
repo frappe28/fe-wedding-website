@@ -3,7 +3,7 @@
 # Imposta le variabili
 AWS_PROFILE=wedding
 AWS_REGION=eu-west-1
-VITE_API_ENV=prod
+VITE_APP_ENV=prod
 BUCKET_NAME="prod-francis-wedding-frontend"
 DISTRIBUTION_ID="EVXX5YN6VUF59"  
 BUILD_DIR="dist"

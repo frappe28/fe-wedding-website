@@ -1,6 +1,6 @@
 dev-start:
-	export VITE_API_ENV=dev; \
-  pnpm serve
+	export VITE_APP_ENV=dev; \
+  vite serve
 prd-start:
-	export VITE_API_ENV=prd; \
-  pnpm servez
+	export VITE_APP_ENV=prd; \
+  vite serve

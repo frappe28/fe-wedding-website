@@ -3,7 +3,7 @@
 # Imposta le variabili
 export AWS_PROFILE=wedding
 export AWS_REGION=eu-west-1
-export VITE_API_ENV=dev
+export VITE_APP_ENV=dev
 BUCKET_NAME="dev-francis-wedding-frontend"
 DISTRIBUTION_ID="ENWYOMI0LW549"  # Inserisci l'ID della tua distribuzione CloudFront
 BUILD_DIR="dist"
