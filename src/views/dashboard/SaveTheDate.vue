@@ -1,7 +1,7 @@
 <script setup>
 
 //const videoSrc = `${BASE_URL}/photos/SaveTheDate.mov`;
-const videoSrc = `https://d25ynqiopfm3p.cloudfront.net/photos/SaveTheDate.mov`;
+const videoSrc = `${BASE_URL}/photos/SaveTheDate.mov`;
 </script>
 
 <template>
