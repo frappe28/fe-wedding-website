@@ -1,6 +1,6 @@
 <script setup>
+import { BASE_URL } from '@/costants';
 
-//const videoSrc = `${BASE_URL}/photos/SaveTheDate.mov`;
 const videoSrc = `${BASE_URL}/photos/SaveTheDate.mov`;
 </script>
 
