@@ -6,7 +6,7 @@ import wrings from '@images/pages/wedding-ring.png'
 import rings from '@images/rings.svg?raw'
 import { useRoute } from 'vue-router'
 import { useTheme } from 'vuetify'
-import { router , disabilitaEventiDevTools } from '../plugins/router'
+import { disabilitaEventiDevTools, router } from '../plugins/router'
 import { confermaPresenza, getInvitato } from '../service/backend'
 
 
@@ -42,6 +42,7 @@ onBeforeMount(async () => {
   }
 
   if (caricaPagina) {
+    form.value.id = figlio.id;
     form.value.nome = figlio.nome;
     form.value.cognome = figlio.cognome;
     form.value.username = figlio.username;
@@ -93,6 +94,7 @@ onMounted(() => {
 });
 
 const form = ref({
+  id: '',
   nome_cognome: '',
   nome: '',
   cognome: '',

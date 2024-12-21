@@ -6,8 +6,8 @@ const API = axios.create({
 });
 
 export const signIn = async (user, responseOmonimi) => {
-    let nome = user.nome.replace(' ', '').replace("'", '').toLowerCase();
-    let cognome = user.cognome.replace(' ', '').replace("'", '').toLowerCase();
+    let nome = user.nome.replaceAll(' ', '').replaceAll("'", '').toLowerCase();
+    let cognome = user.cognome.replaceAll(' ', '').replaceAll("'", '').toLowerCase();
     let params = {
         nome,
         cognome
@@ -21,7 +21,12 @@ export const signIn = async (user, responseOmonimi) => {
         return { "state": false, "message": "Non Invitato" };
     } else {
         if (responseOmonimi != null && responseOmonimi.filter(r => r.nome == nome && r.cognome == cognome)?.length > 0 && params.anno) {
-            const invitato = responseOmonimi.filter(r => r.id === r.nome + r.cognome + params.anno.slice(-2))
+
+            const invitato = responseOmonimi.filter(r => {
+                let nomeOmonimo = r.nome.replaceAll(' ', '').replaceAll("'", '').toLowerCase();
+                let cognomeOmonimo = r.cognome.replaceAll(' ', '').replaceAll("'", '').toLowerCase();
+                return r.id === nomeOmonimo + cognomeOmonimo + params.anno.slice(-2);
+            });
             if (invitato != null && invitato.length === 1) {
                 return {
                     data: invitato[0],
@@ -53,7 +58,7 @@ export const signIn = async (user, responseOmonimi) => {
 export const confermaPresenza = async (user) => {
     try {
         const input = {
-            id: user.nome.replace(' ', '').replace("'", '') + user.cognome.replace(' ', '').replace("'", ''),
+            id: user.id,
             nome: user.nome,
             cognome: user.cognome,
             intolleranze: user.intolleranze,

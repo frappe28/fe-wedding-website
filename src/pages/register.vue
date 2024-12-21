@@ -6,7 +6,7 @@ import wrings from '@images/pages/wedding-ring.png'
 import rings from '@images/rings.svg?raw'
 import { useRoute } from 'vue-router'
 import { useTheme } from 'vuetify'
-import { router , disabilitaEventiDevTools } from '../plugins/router'
+import { disabilitaEventiDevTools, router } from '../plugins/router'
 import { confermaPresenza } from '../service/backend'
 
 
@@ -25,6 +25,7 @@ onBeforeMount(() => {
       data = JSON.parse(localStorage.getItem("signInData"));
     }
   } catch (e) { }
+  const id = data.id;
   const nome = data.nome;
   const cognome = data.cognome;
   const username = data.username;
@@ -37,6 +38,7 @@ onBeforeMount(() => {
   }
 
   if (caricaPagina) {
+    form.value.id = id;
     form.value.nome = nome;
     form.value.cognome = cognome;
     form.value.username = username;
@@ -86,6 +88,7 @@ onMounted(() => {
 });
 
 const form = ref({
+  id: '',
   nome_cognome: '',
   nome: '',
   cognome: '',
