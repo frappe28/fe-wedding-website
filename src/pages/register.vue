@@ -28,7 +28,7 @@ onBeforeMount(() => {
   const id = data.id;
   const nome = data.nome;
   const cognome = data.cognome;
-  const username = data.username;
+  const username = data.username ?? "";
   const invito = data.invito;
 
   if (nome == null || nome == "" || cognome == null || cognome == "") {
