@@ -68,7 +68,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <VCard title="🕺🏻💃🏻 Brindiamo insieme? Alle 19 devi essere qui:" class="position-relative v-text-wrap-justify">
+  <VCard title="🕺🏻💃🏻 Brindiamo insieme? Alle 19.30 devi essere qui:" class="position-relative v-text-wrap-justify">
     <template #subtitle>
       <p class="text-body-1 mb-0 mt-">
         <span class="d-inline-block font-weight-medium text-high-emphasis v-text-wrap-justify">

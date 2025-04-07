@@ -16,7 +16,9 @@ import { DATE_AFTER_XMAS, THE_DATE } from '@/costants'
 import LibrettoMessa from '@/views/dashboard/LibrettoMessa.vue'
 import MappaLocationDopoFesta from '@/views/dashboard/MappaLocationDopoFesta.vue'
 import MappaLocationSala from '@/views/dashboard/MappaLocationSala.vue'
+import PhotoFranci from '@/views/dashboard/PhotoFranci.vue'
 import SaveTheDate from '@/views/dashboard/SaveTheDate.vue'
+import Timeline from '@/views/dashboard/Timeline.vue'
 import '../assets/styles/frasanz-dash.scss'
 
 //TODO GESTIRE FOCUS ALL'INIZIO DELLA PAGINA (SU IPHONE DI FRANCESCA NON VA)
@@ -126,12 +128,21 @@ onUnmounted(() => {
               <Countdown v-else />
             </VCard>
           </VCol>
+          <VCol cols="12">
+            <VCard>
+              <PhotoFranci v-if="isCountdownFinished" />
+            </VCard>
+          </VCol>
         </VRow>
       </VCol>
 
       <VCol cols="12">
         <VRow>
-          <VCol cols="12" md="4">
+          <VCol cols="12" md="4" v-if="isCountdownFinished">
+            <Timeline />
+            <Calendar />
+          </VCol>
+          <VCol cols="12" md="4" v-else>
             <Calendar />
             <Carosello />
           </VCol>

@@ -3,6 +3,16 @@ import { BASE_URL } from '@/costants';
 
 //TODO le foto si vedono male su smartphone, bisogna fare qualche modifica al carosello
 const items = [
+  `${BASE_URL}/photos/0_photo_1.jpg`,
+  `${BASE_URL}/photos/0_photo_2.jpg`,
+  `${BASE_URL}/photos/0_photo_3.jpg`,
+  `${BASE_URL}/photos/0_photo_4.jpg`,
+  `${BASE_URL}/photos/0_photo_5.jpg`,
+  `${BASE_URL}/photos/0_photo_6.jpg`,
+  `${BASE_URL}/photos/0_photo_7.jpg`,
+  `${BASE_URL}/photos/0_photo_8.jpg`,
+  `${BASE_URL}/photos/0_photo_9.jpg`,
+  `${BASE_URL}/photos/0_photo_10.jpg`,
   `${BASE_URL}/photos/photo_1.jpg`,
   `${BASE_URL}/photos/photo_2.jpg`,
   `${BASE_URL}/photos/photo_3.jpg`,
