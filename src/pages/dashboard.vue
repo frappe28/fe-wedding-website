@@ -12,8 +12,9 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { disabilitaEventiDevTools, router } from '../plugins/router'
 
 //le magie di checco
-import { DATE_AFTER_XMAS, THE_DATE } from '@/costants'
+import { DATE_AFTER_XMAS, THE_DATE, THE_DATE_SALA } from '@/costants'
 import LibrettoMessa from '@/views/dashboard/LibrettoMessa.vue'
+import Tavolo from '@/views/dashboard/Tavolo.vue'
 import MappaLocationDopoFesta from '@/views/dashboard/MappaLocationDopoFesta.vue'
 import MappaLocationSala from '@/views/dashboard/MappaLocationSala.vue'
 import PhotoFranci from '@/views/dashboard/PhotoFranci.vue'
@@ -24,20 +25,27 @@ import '../assets/styles/frasanz-dash.scss'
 //TODO GESTIRE FOCUS ALL'INIZIO DELLA PAGINA (SU IPHONE DI FRANCESCA NON VA)
 //GIORNO DEL MATRIMONIO 
 const targetDate = new Date(THE_DATE);
+const targetDateSala = new Date(THE_DATE_SALA);
 const isCountdownFinished = ref(false);
+const isCountdownFinishedSala = ref(false);
 const timeRemainingDays = ref('');
 const timeRemainingMinutes = ref('');
 
 const calculateTimeRemaining = () => {
   const now = new Date();
   const difference = targetDate - now;
+  const differenceSala = targetDateSala - now;
 
   if (difference <= 0) {
     isCountdownFinished.value = true;
     timeRemainingDays.value = '';
     timeRemainingMinutes.value = '';
-    return;
   }
+
+  if (differenceSala <= 0) {
+    isCountdownFinishedSala.value = true;
+  }
+  return;
 };
 
 //DOPO NATALE
@@ -128,9 +136,14 @@ onUnmounted(() => {
               <Countdown v-else />
             </VCard>
           </VCol>
-          <VCol cols="12">
+          <VCol cols="12" v-if="isCountdownFinishedSala && invito === 'sala'">
             <VCard>
-              <PhotoFranci v-if="isCountdownFinished" />
+              <Tavolo />
+            </VCard>
+          </VCol>
+          <VCol cols="12" v-if="isCountdownFinished">
+            <VCard>
+              <PhotoFranci />
             </VCard>
           </VCol>
         </VRow>

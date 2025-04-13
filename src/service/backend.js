@@ -96,3 +96,16 @@ export const getInvitato = async (id) => {
         throw new Error(`Recupero Invitato Fallito: ${error.message}`)
     }
 }
+
+export const getTavolo = async (id) => {
+    try {
+        const response = await API.get('/get-tavolo',
+            {
+                params: { id }
+            }
+        );
+        return response.data;
+    } catch (error) {
+        throw new Error(`Recupero Tavolo Fallito: ${error.message}`)
+    }
+}
